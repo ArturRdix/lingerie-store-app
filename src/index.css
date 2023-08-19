@@ -27,11 +27,38 @@ header {}
     position: absolute;
     background-color: #e0e0e0;
     width: 450px;
-    max-height: 100px;
+    min-height: 100px;
     top: 45px;
     right: 0;
     box-shadow: 10px 10px 15px 0px #00000057;
     z-index: 1000;
+}
+
+.window-cart .item-order {
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.window-cart .item-order .right-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 7px;
+}
+.window-cart .item-order .right-block b,
+.window-cart .item-order .right-block h2{
+    font-weight: 100;
+}
+
+.window-cart .item-order img {
+    width: 70px;
+    float: left;
+}
+
+.trash-icon {
+    color: #d13030;
+    cursor: pointer;
 }
 
 header .logo {
@@ -212,4 +239,3 @@ main .item .bottom-block .add-cart {
 main .item .bottom-block .add-cart:hover {
     transform: scale(1.2);
 }
-

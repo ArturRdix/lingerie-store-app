@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { BsFillCartFill } from 'react-icons/bs'
+import OrderItem from './OrderItem';
 
-export default function Header() {
+export default function Header({ orders, onRemove }) {
     const [cartState, setCartState] = useState(false);
 
     return (
@@ -12,12 +13,19 @@ export default function Header() {
                     <a href="#">Каталог</a>
                     <a href="#">Про нас</a>
                     <a href="#">Контакты</a>
-                <BsFillCartFill onClick={() => setCartState(cartState => !cartState)} className={`cart-icon ${cartState && 'active'}`} />
+                    <BsFillCartFill
+                        onClick={() => setCartState(cartState => !cartState)}
+                        className={`cart-icon ${cartState && 'active'}`} />
                 </nav>
 
                 {cartState && (
                     <div className="window-cart">
-
+                        {orders.map(element => (
+                            <OrderItem
+                                onRemove={onRemove}
+                                key={element.id}
+                                item={element} />
+                        ))}
                     </div>
                 )}
             </div>

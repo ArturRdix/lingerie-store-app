@@ -48,10 +48,19 @@ function App() {
       price: '1140'
     },
   ])
+  const [orders, setOrders] = useState([])
+
+  const addToOrder = (item) => {
+    setOrders([...orders, item])
+  }
+  const removeFromOrder = (item) => {
+    const updatedOrders = orders.filter(orderItem => orderItem.id !== item.id);
+    setOrders(updatedOrders);
+  };
   return (
     <div className="wrapper">
-      <Header />
-      <ItemsProduct items={items}/>
+      <Header onRemove={removeFromOrder} orders={orders} />
+      <ItemsProduct  onAdd={addToOrder} items={items} />
       <Footer />
     </div>
   );
