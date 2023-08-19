@@ -27,7 +27,6 @@ header {}
     position: absolute;
     background-color: #e0e0e0;
     width: 450px;
-    min-height: 100px;
     top: 45px;
     right: 0;
     box-shadow: 10px 10px 15px 0px #00000057;
@@ -40,14 +39,21 @@ header {}
     margin-bottom: 10px;
 }
 
+.total-price-text {
+    font-size: 18px;
+    font-weight: 300;
+    float: right;
+}
+
 .window-cart .item-order .right-block {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding-left: 7px;
 }
+
 .window-cart .item-order .right-block b,
-.window-cart .item-order .right-block h2{
+.window-cart .item-order .right-block h2 {
     font-weight: 100;
 }
 
