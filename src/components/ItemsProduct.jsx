@@ -5,7 +5,7 @@ export default function ItemsProduct({ items }) {
     return (
         <main>
             {items.map(element => (
-                <Item item={element}/>
+                <Item key={element.id} item={element}/>
             ))}
         </main>
     )

@@ -1,5 +1,5 @@
 /*****Импортирование шрифтов из google*****/
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Roboto+Condensed:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Roboto+Condensed:wght@300;500;700&display=swap');
 
 /*****Базовые стили*****/
 * {
@@ -21,8 +21,50 @@ body {
 }
 
 /*****Стилизация Header*****/
+header {}
+
+.window-cart {
+    position: absolute;
+    background-color: #e0e0e0;
+    width: 450px;
+    max-height: 100px;
+    top: 45px;
+    right: 0;
+    box-shadow: 10px 10px 15px 0px #00000057;
+    z-index: 1000;
+}
+
 header .logo {
     font-weight: 600;
+}
+
+header .top-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+header .top-block .cart-icon {
+    color: #222;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.active {
+    transform: scale(1.2);
+    color: #3f3f3f !important;
+}
+
+header .top-block nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+header .top-block nav a {
+    text-decoration: none;
+    color: #222;
 }
 
 header .banner {
@@ -88,8 +130,6 @@ footer {
     left: 0;
 }
 
-footer .top_block {}
-
 .navigation {
     display: flex;
     justify-content: center;
@@ -116,16 +156,60 @@ main {
 }
 
 main .item {
+    border-radius: 10px 10px 0 0;
     width: 20%;
     margin-bottom: 50px;
+    overflow: hidden;
+    background-color: #e4e4e4;
 }
 
 main .item img {
     width: 100%;
-    border-radius: 10px 10px 0 0;
     transition: 0.2s;
 }
-main .item img:hover{
+
+main .item img:hover {
     cursor: pointer;
     transform: scale(1.06);
 }
+
+main h2,
+main b {
+    font-size: 16px;
+    color: #333;
+    font-weight: 300;
+}
+
+main h2 {
+    font-size: 18px;
+}
+
+main h2,
+main .bottom-block {
+    margin: 0 5px 5px;
+    font-weight: 300;
+}
+
+main .item .bottom-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main .item .bottom-block .add-cart {
+    font-family: fangsong;
+    color: #fff;
+    background: #222;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+main .item .bottom-block .add-cart:hover {
+    transform: scale(1.2);
+}
+
