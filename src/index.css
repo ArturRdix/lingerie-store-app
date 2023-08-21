@@ -8,6 +8,13 @@
     box-sizing: border-box;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
 body {
     background-color: #fff;
     color: #222;
@@ -16,8 +23,9 @@ body {
 }
 
 .wrapper {
-    width: 1280px;
+    width: 900px;
     margin: 30px auto;
+    max-width: 90vw;
 }
 
 /*****Стилизация Header*****/
@@ -25,18 +33,45 @@ header {}
 
 .window-cart {
     position: absolute;
-    background-color: #e0e0e0;
-    width: 450px;
+    background-color: #e0e0e0e6;
     top: 45px;
     right: 0;
     box-shadow: 10px 10px 15px 0px #00000057;
     z-index: 1000;
+    padding: 10px;
+}
+
+.window-cart .empty {
+    font-weight: 100;
 }
 
 .window-cart .item-order {
     width: 100%;
     display: flex;
     margin-bottom: 10px;
+}
+
+.btn-cart {    font-size: 16px;
+    background: none;
+    color: #222;
+    border: none;
+    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+    line-height: 21px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-cart:active{
+    background-color: rgba(34, 34, 34, 0.195);
+}
+.input-cart {
+    background: none;
+    outline: none;
+    border: 0;
+    width: 20px;
+    text-align: center;
 }
 
 .total-price-text {
@@ -67,6 +102,14 @@ header {}
     cursor: pointer;
 }
 
+.trash-icon:hover {
+    scale: 1.1;
+}
+
+.trash-icon:active {
+    scale: 0.9;
+}
+
 header .logo {
     font-weight: 600;
 }
@@ -95,9 +138,18 @@ header .top-block nav {
     align-items: center;
 }
 
-header .top-block nav a {
+header .top-block nav .item-navigation {
     text-decoration: none;
     color: #222;
+    transition: 0.3s;
+}
+
+header .top-block nav .item-navigation:hover {
+    scale: 1.1;
+}
+
+header .top-block nav .item-navigation:active {
+    scale: 0.9;
 }
 
 header .banner {
@@ -140,6 +192,10 @@ header .banner::before {
     transition: 1s;
 }
 
+.item-quantity {
+    font-size: 16px;
+}
+
 header .banner:hover {
     background-color: #b1b1b1;
 }
@@ -172,12 +228,17 @@ footer {
 
 .navigation a {
     font-size: 20px;
-    color: black;
+    color: #222;
     text-decoration: none;
+    transition: 0.3s;
 }
 
 .navigation a:hover {
-    color: #222;
+    scale: 1.1;
+}
+
+.navigation a:active {
+    scale: 0.9;
 }
 
 main {
@@ -203,13 +264,13 @@ main .item img {
 
 main .item img:hover {
     cursor: pointer;
-    transform: scale(1.06);
+    scale: 1.1;
 }
 
 main h2,
 main b {
     font-size: 16px;
-    color: #333;
+    color: #222;
     font-weight: 300;
 }
 
@@ -243,5 +304,9 @@ main .item .bottom-block .add-cart {
 }
 
 main .item .bottom-block .add-cart:hover {
-    transform: scale(1.2);
+    scale: 1.2;
+}
+
+main .item .bottom-block .add-cart:active {
+    scale: 0.9;
 }
