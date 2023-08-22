@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BsTrashFill } from 'react-icons/bs';
+import styles from './OrderItem.module.css'
 
 export default function OrderItem({ item, onRemove, onUpdateQuantity }) {
     const [inputQuantity, setInputQuantity] = useState(item.quantity);
@@ -18,17 +19,17 @@ export default function OrderItem({ item, onRemove, onUpdateQuantity }) {
     };
 
     return (
-        <div className="item-order">
-            <img src={"./product-images/" + item.img} />
-            <div className="right-block">
-                <h2>{item.title}</h2>
-                <b>
+        <div className={styles.itemOrder}>
+            <img className={styles.itemImg} src={"./product-images/" + item.img} />
+            <div className={styles.rightBlock}>
+                <h2 className={styles.itemTitle}>{item.title}</h2>
+                <b className={styles.itemPrice}>
                     {inputQuantity > 1
                         ? `${item.price}₴ x ${inputQuantity} = ${item.price * inputQuantity}₴`
                         : `${item.price}₴`}
                 </b>
-                <div className="quantity-controls">
-                    <button className='btn-cart'
+                <div className={styles.quantityControls}>
+                    <button className={styles.btnCart}
                         onClick={() => {
                             if (inputQuantity > 1) {
                                 const newQuantity = inputQuantity - 1;
@@ -37,14 +38,14 @@ export default function OrderItem({ item, onRemove, onUpdateQuantity }) {
                             }
                         }}>-</button>
                     <input
-                        className='input-cart'
+                        className={styles.inputCart}
                         type="number"
                         value={inputQuantity}
                         min={1}
                         max={99}
                         onChange={handleQuantityChange}
                     />
-                    <button className='btn-cart'
+                    <button className={styles.btnCart}
                         onClick={() => {
                             if (inputQuantity < 99) {
                                 const newQuantity = inputQuantity + 1;
@@ -55,7 +56,10 @@ export default function OrderItem({ item, onRemove, onUpdateQuantity }) {
                         +
                     </button>
                 </div>
-                <BsTrashFill onClick={() => onRemove(item)} className='trash-icon' />
+            </div>
+            
+            <div className={styles.trashIconBlock}>
+            <BsTrashFill onClick={() => onRemove(item)} className={styles.trashIcon} />
             </div>
         </div>
     );

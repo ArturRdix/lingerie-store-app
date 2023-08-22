@@ -1,0 +1,61 @@
+
+.itemOrder {
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.btnCart {
+    font-size: 16px;
+    background: none;
+    color: #222;
+    border: none;
+    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+    line-height: 21px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btnCart:active {
+    background-color: rgba(34, 34, 34, 0.195);
+}
+
+.inputCart {
+    background: none;
+    outline: none;
+    border: 0;
+    width: 20px;
+    text-align: center;
+}
+.rightBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 7px;
+}
+
+.itemTitle,
+.itemPrice {
+    font-weight: 100;
+}
+
+.itemImg {
+    width: 70px;
+    float: left;
+}
+
+.trashIcon {
+    color: #d13030;
+    cursor: pointer;
+}
+
+.trashIcon:hover {
+    scale: 1.1;
+}
+
+.trashIcon:active {
+    scale: 0.9;
+}

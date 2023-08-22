@@ -1,11 +1,11 @@
 import React from 'react'
-import Item from './Item'
+import ProductItem from './ProductItem/ProductItem'
 
-export default function ItemsProduct({ items, onAdd }) {
+export default function ProductList({ items, onAdd }) {
     return (
         <main>
             {items.map(element => (
-                <Item
+                <ProductItem
                     key={element.id}
                     item={element}
                     onAdd={onAdd} />

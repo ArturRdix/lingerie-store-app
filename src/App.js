@@ -1,8 +1,8 @@
-import { useState } from "react";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import ItemsProduct from "./components/ItemsProduct";
-
+import React, { useState } from 'react';
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
+import ProductList from "./components/ProductList";
+import Popup from './components/Popup/Popup';
 function App() {
   const [items, setItems] = useState([
     {
@@ -48,44 +48,56 @@ function App() {
       price: '1140'
     },
   ])
-  const [orders, setOrders] = useState([])
+  const [orders, setOrders] = useState([]);
+  const [popups, setPopups] = useState([]);
 
   const updateQuantity = (itemId, newQuantity) => {
-    const updatedOrders = orders.map(orderItem => {
-        if (orderItem.id === itemId) {
-            return { ...orderItem, quantity: newQuantity };
-        }
-        return orderItem;
-    });
+    const updatedOrders = orders.map(orderItem => 
+      orderItem.id === itemId ? { ...orderItem, quantity: newQuantity } : orderItem
+    );
 
     setOrders(updatedOrders);
-};
+  };
 
   const addToOrder = (item) => {
-    let isInArray = false;
-    let updatedOrders = orders.map(orderItem => {
-      if (orderItem.id === item.id) {
-        isInArray = true;
-        return { ...orderItem, quantity: orderItem.quantity + 1 };
-      }
-      return orderItem;
-    });
+    const existingOrderItem = orders.find(orderItem => orderItem.id === item.id);
 
-    if (!isInArray) {
-      updatedOrders.push({ ...item, quantity: 1 });
+    if (existingOrderItem) {
+      const updatedOrders = orders.map(orderItem => 
+        orderItem.id === item.id ? { ...orderItem, quantity: orderItem.quantity + 1 } : orderItem
+      );
+
+      setOrders(updatedOrders);
+    } else {
+      const updatedOrders = [...orders, { ...item, quantity: 1 }];
+      setOrders(updatedOrders);
     }
 
-    setOrders(updatedOrders);
+    setPopups(prevPopups => [...prevPopups, `${item.title} добавлен в корзину`]);
   };
 
   const removeFromOrder = (item) => {
     const updatedOrders = orders.filter(orderItem => orderItem.id !== item.id);
     setOrders(updatedOrders);
   };
+
+  const closePopup = (index) => {
+    setPopups(prevPopups => prevPopups.filter((_, i) => i !== index));
+  };
+
   return (
     <div className="wrapper">
+      {popups.map((popup, index) => (
+        <Popup
+          key={index}
+          message={popup}
+          onPopupClose={closePopup}
+          index={index}
+        />
+      ))}
+
       <Header updateQuantity={updateQuantity} onRemove={removeFromOrder} orders={orders} />
-      <ItemsProduct onAdd={addToOrder} items={items} />
+      <ProductList onAdd={addToOrder} items={items} />
       <Footer />
     </div>
   );

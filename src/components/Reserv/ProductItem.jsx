@@ -1,9 +1,10 @@
 import React from 'react'
 
-export default function Item({ item, onAdd }) {
+export default function ProductItem({ item, onAdd }) {
     return (
         <div className='item'>
-            <img src={"./product-images/" + item.img} />
+            <div className="image-block">
+                <img src={"./product-images/" + item.img} /></div>
             <h2>{item.title}</h2>
             <div className="bottom-block">
                 <b>{item.price}₴</b>

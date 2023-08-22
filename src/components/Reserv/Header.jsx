@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { BsFillCartFill } from 'react-icons/bs'
+import React, { useState, useEffect } from 'react';
+import { BsFillCartFill } from 'react-icons/bs';
 import OrderItem from './OrderItem';
 
 export default function Header({ orders, onRemove, updateQuantity }) {
     const [cartState, setCartState] = useState(false);
-    const [totalPrice, setTotalPrice] = useState(0)
-
+    const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
         let calculatedTotalPrice = 0;
@@ -20,7 +19,6 @@ export default function Header({ orders, onRemove, updateQuantity }) {
 
         setTotalPrice(calculatedTotalPrice);
     }, [orders]);
-
 
     useEffect(() => {
         function handleDocumentClick(event) {
@@ -40,7 +38,7 @@ export default function Header({ orders, onRemove, updateQuantity }) {
     }, [cartState]);
 
     return (
-        <header>.
+        <header>
             <div className="top-block">
                 <h1 className="logo">Monika Lingerie</h1>
                 <nav>
@@ -73,6 +71,5 @@ export default function Header({ orders, onRemove, updateQuantity }) {
             </div>
             <div className="banner"></div>
         </header>
-    )
-    
+    );
 }
