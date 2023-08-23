@@ -57,9 +57,16 @@ export default function OrderItem({ item, onRemove, onUpdateQuantity }) {
                     </button>
                 </div>
             </div>
-            
+
             <div className={styles.trashIconBlock}>
-            <BsTrashFill onClick={() => onRemove(item)} className={styles.trashIcon} />
+                <BsTrashFill
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        onRemove(item);
+                    }}
+                    className={styles.trashIcon}
+                />
+
             </div>
         </div>
     );

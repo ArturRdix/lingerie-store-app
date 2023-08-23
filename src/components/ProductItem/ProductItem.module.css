@@ -6,40 +6,40 @@
     background-color: #e4e4e4;
 }
 
-.item img {
+.itemImg {
     width: 100%;
     transition: 0.3s;
 }
 
-.item img:hover {
+.itemImg:hover {
     cursor: pointer;
     scale: 1.1;
 }
 
-h2,
-b {
+.itemTitle,
+.itemPrice {
     font-size: 15px;
     color: #222;
     font-weight: bold;
 }
 
-h2 {
+.itemTitle {
     font-size: 14px;
 }
 
-h2,
-.bottom-block {
+.itemTitle,
+.bottomBlock {
     margin: 0 5px 5px;
     font-weight: 300;
 }
 
-.item .bottom-block {
+.bottomBlock {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.item .bottom-block .add-cart {
+.addCart {
     font-family: fangsong;
     color: #fff;
     background: #222;
@@ -52,15 +52,15 @@ h2,
     transition: 0.3s;
 }
 
-.item .bottom-block .add-cart:hover {
+.addCart:hover {
     scale: 1.2;
 }
 
-.item .bottom-block .add-cart:active {
+.addCart:active {
     scale: 0.9;
 }
 
-.image-block {
+.imageBlock {
     height: auto;
     overflow: hidden;
 }

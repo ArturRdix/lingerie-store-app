@@ -9,7 +9,9 @@ export default function Footer() {
                     <a className={styles.itemNavigation} href="#">О НАС</a>
                     <a className={styles.itemNavigation} href="#">ОПЛАТА И ДОСТАВКА</a>
                     <a className={styles.itemNavigation} href="#">КОНТАКТЫ</a>
-                    <a className={styles.itemNavigation} href="#">INSTAGRAM</a>
+                    <a className=
+                    {`${styles.itemNavigation} ${styles.itemInstagram}`} 
+                    href="https://www.instagram.com/monika.lingeriee/">INSTAGRAM</a>
                 </nav>
                 </div>
             <div className={styles.bottomBlock}>

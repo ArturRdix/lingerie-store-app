@@ -18,12 +18,12 @@ header {}
 .totalPriceText {
     font-size: 18px;
     font-weight: 300;
-    float: right;
+    float: left;
 }
 
 
-.logo {
-    font-weight: 600;
+.logo {font-family: 'Noto Serif JP', serif;
+    font-weight: 400;
 }
 
 .topBlock {
@@ -88,6 +88,7 @@ header {}
     font-weight: 600;
     color: #fff;
     transition: 0.7s;
+    width: 100%;
 }
 
 .banner::before {

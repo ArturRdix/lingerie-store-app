@@ -24,9 +24,8 @@ export default function Header({ orders, onRemove, updateQuantity }) {
     useEffect(() => {
         function handleDocumentClick(event) {
             if (
-                (cartState && event.target.closest(`.${styles.windowCart}`)) ||
-            event.target.closest(`.${styles.cartIcon}`) ||
-            event.target.closest('.trash-icon')
+                event.target.closest(`.${styles.windowCart}`) ||
+                event.target.closest(`.${styles.cartIcon}`)
             ) {
                 return;
             }
@@ -37,11 +36,13 @@ export default function Header({ orders, onRemove, updateQuantity }) {
             document.removeEventListener('click', handleDocumentClick);
         };
     }, [cartState]);
+    
+    
 
     return (
         <header>
             <div className={styles.topBlock}>
-                <h1 className={styles.logo}>Monika Lingerie</h1>
+                <h1 className={styles.logo}>MONIKA LENGIRIE</h1>
                 <nav className={styles.headerNavigation}>
                     <a className={styles.itemNavigation} href="#">Каталог</a>
                     <a className={styles.itemNavigation} href="#">Про нас</a>
@@ -65,7 +66,7 @@ export default function Header({ orders, onRemove, updateQuantity }) {
                             <h3 className={styles.empty}>Ваша корзина пуста</h3>
                         )}
                         {orders.length > 0 && (
-                            <b className={styles.totalPriceText}>Итоговая сумма к оплате: {totalPrice} грн.</b>
+                            <b className={styles.totalPriceText}>Сумма: {totalPrice} грн.</b>
                         )}
                     </div>
                 )}

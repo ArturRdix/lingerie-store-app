@@ -1,0 +1,19 @@
+.categories{
+
+}
+.categoryItem{
+    font-size: 14px;
+    display: inline-block;
+    background-color: #f2f2f2f2;
+    border-radius: 50px;
+    padding: 5px 15px;
+    margin-bottom: 25px;
+    margin-right: 15px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: 0.3s;
+}
+.categoryItem:hover{
+    border-color: silver;
+    scale: 1.1;
+}

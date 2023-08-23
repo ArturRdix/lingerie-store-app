@@ -1,58 +1,77 @@
 import React, { useState } from 'react';
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
-import ProductList from "./components/ProductList";
+import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
+import ProductList from './components/ProductList';
 import Popup from './components/Popup/Popup';
+import Category from './components/Category/Category';
+
 function App() {
-  const [items, setItems] = useState([
+  const originslItems = [
     {
       id: 1,
       title: 'Голубой комлпект белья',
       img: 'blueWhite_set_lingerie.heic',
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: '1200'
+      price: '1200',
+      color: 'blue'
     },
     {
       id: 2,
       title: 'Персиковый комлпект белья',
       img: 'peach_set1.heic',
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: '980'
+      price: '980',
+      color: 'pink'
     },
     {
       id: 3,
       title: 'Розовые трусы(на регуляторах)',
       img: 'pink_underpants.heic',
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: '550'
+      price: '550',
+      color: 'pink'
     },
     {
       id: 4,
       title: 'Крсаный комплект белья',
       img: 'red_set_lingerie.heic',
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: '1050'
+      price: '1050',
+      color: 'red'
     },
     {
       id: 5,
       title: 'Лифчики',
       img: 'redBlack-brssiere.heic',
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: '340'
+      price: '340',
+      color: 'red'
     },
     {
       id: 6,
       title: 'Белый комплект белья',
       img: 'white_set_lingerie1.heic',
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: '1140'
+      price: '1140',
+      color: 'white'
     },
-  ])
+  ]
+
+  const [items, setItems] = useState(originslItems)
   const [orders, setOrders] = useState([]);
   const [popups, setPopups] = useState([]);
 
+  const colorCategory = (category) => {
+    if (category === 'all') {
+      setItems(originslItems);
+    } else {
+      setItems(originslItems.filter(item => item.color === category));
+    }
+  };
+
+
   const updateQuantity = (itemId, newQuantity) => {
-    const updatedOrders = orders.map(orderItem => 
+    const updatedOrders = orders.map(orderItem =>
       orderItem.id === itemId ? { ...orderItem, quantity: newQuantity } : orderItem
     );
 
@@ -63,7 +82,7 @@ function App() {
     const existingOrderItem = orders.find(orderItem => orderItem.id === item.id);
 
     if (existingOrderItem) {
-      const updatedOrders = orders.map(orderItem => 
+      const updatedOrders = orders.map(orderItem =>
         orderItem.id === item.id ? { ...orderItem, quantity: orderItem.quantity + 1 } : orderItem
       );
 
@@ -97,6 +116,7 @@ function App() {
       ))}
 
       <Header updateQuantity={updateQuantity} onRemove={removeFromOrder} orders={orders} />
+      <Category colorCategory={colorCategory} />
       <ProductList onAdd={addToOrder} items={items} />
       <Footer />
     </div>
