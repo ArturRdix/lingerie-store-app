@@ -22,6 +22,7 @@ footer {
 .itemNavigation:hover {
     scale: 1.1;
 }
+
 .itemInstagram:hover {
     background-image: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
     -webkit-background-clip: text;

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
-import ProductList from './components/ProductList';
 import Popup from './components/Popup/Popup';
-import Category from './components/Category/Category';
+import Main from './Pages/Main';
 
 function App() {
   const originslItems = [
@@ -115,9 +114,14 @@ function App() {
         />
       ))}
 
-      <Header updateQuantity={updateQuantity} onRemove={removeFromOrder} orders={orders} />
-      <Category colorCategory={colorCategory} />
-      <ProductList onAdd={addToOrder} items={items} />
+      <Header
+        updateQuantity={updateQuantity}
+        onRemove={removeFromOrder}
+        orders={orders} />
+      <Main
+        colorCategory={colorCategory}
+        onAdd={addToOrder}
+        items={items} />
       <Footer />
     </div>
   );

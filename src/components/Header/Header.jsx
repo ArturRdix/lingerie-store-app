@@ -1,11 +1,12 @@
 import styles from './Header.module.css'
 import React, { useState, useEffect } from 'react';
 import { BsFillCartFill } from 'react-icons/bs';
-import OrderItem from '../OrderItem/OrderItem';
+import CartModal from '../CartModule/CartModal';
 
 export default function Header({ orders, onRemove, updateQuantity }) {
     const [cartState, setCartState] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [isFixed, setIsFixed] = useState(false);
 
     useEffect(() => {
         let calculatedTotalPrice = 0;
@@ -16,32 +17,48 @@ export default function Header({ orders, onRemove, updateQuantity }) {
             if (!isNaN(price)) {
                 calculatedTotalPrice += price * quantity;
             }
+        } function handleScroll() {
+            if (window.scrollY > 100) {
+                setIsFixed(true);
+            } else {
+                setIsFixed(false);
+            }
         }
-
+        window.addEventListener('scroll', handleScroll);
         setTotalPrice(calculatedTotalPrice);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, [orders]);
 
     useEffect(() => {
         function handleDocumentClick(event) {
-            if (
-                event.target.closest(`.${styles.windowCart}`) ||
-                event.target.closest(`.${styles.cartIcon}`)
-            ) {
-                return;
+            const cartIconClicked = event.target.closest(`.${styles.cartIcon}`);
+            const cartWindowClicked = event.target.closest(`.${styles.cartModal}`);
+            const cartContentClicked = event.target.closest(`.${styles.cartItems}`);
+    
+            if (!cartWindowClicked && !cartContentClicked) {
+                if (!cartIconClicked) {
+                    setCartState(false);
+                }
             }
-            setCartState(false);
         }
+    
         document.addEventListener('click', handleDocumentClick);
+    
         return () => {
             document.removeEventListener('click', handleDocumentClick);
         };
     }, [cartState]);
     
-    
+
+
+
+
 
     return (
-        <header>
-            <div className={styles.topBlock}>
+        <header className={styles.header}>
+            <div className={`${styles.topBlock} ${isFixed ? styles.fixedTopBlock : ''}`}>
                 <h1 className={styles.logo}>MONIKA LENGIRIE</h1>
                 <nav className={styles.headerNavigation}>
                     <a className={styles.itemNavigation} href="#">Каталог</a>
@@ -51,26 +68,16 @@ export default function Header({ orders, onRemove, updateQuantity }) {
                         onClick={() => setCartState(cartState => !cartState)}
                         className={`${styles.cartIcon} ${cartState ? styles.active : ''}`} />
                 </nav>
-                {cartState && (
-                    <div className={styles.windowCart}>
-                        {orders.length > 0 ? (
-                            orders.map(element => (
-                                <OrderItem
-                                    key={element.id}
-                                    item={element}
-                                    onRemove={onRemove}
-                                    onUpdateQuantity={updateQuantity}
-                                />
-                            ))
-                        ) : (
-                            <h3 className={styles.empty}>Ваша корзина пуста</h3>
-                        )}
-                        {orders.length > 0 && (
-                            <b className={styles.totalPriceText}>Сумма: {totalPrice} грн.</b>
-                        )}
-                    </div>
-                )}
-            </div>
+                
+            </div><CartModal
+                    orders={orders}
+                    onRemove={onRemove}
+                    onUpdateQuantity={updateQuantity}
+                    isOpen={cartState}
+                    onClose={() => setCartState(false)}
+                    totalPrice={totalPrice}
+                />
+                
             <div className={styles.banner}></div>
         </header>
     );
