@@ -17,15 +17,15 @@ export default function Header({ orders, onRemove, updateQuantity }) {
             if (!isNaN(price)) {
                 calculatedTotalPrice += price * quantity;
             }
-        } function handleScroll() {
-            if (window.scrollY > 100) {
-                setIsFixed(true);
-            } else {
-                setIsFixed(false);
-            }
         }
+
+        function handleScroll() {
+            setIsFixed(window.scrollY > 100);
+        }
+
         window.addEventListener('scroll', handleScroll);
         setTotalPrice(calculatedTotalPrice);
+
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
@@ -36,25 +36,20 @@ export default function Header({ orders, onRemove, updateQuantity }) {
             const cartIconClicked = event.target.closest(`.${styles.cartIcon}`);
             const cartWindowClicked = event.target.closest(`.${styles.cartModal}`);
             const cartContentClicked = event.target.closest(`.${styles.cartItems}`);
-    
+
             if (!cartWindowClicked && !cartContentClicked) {
                 if (!cartIconClicked) {
                     setCartState(false);
                 }
             }
         }
-    
+
         document.addEventListener('click', handleDocumentClick);
-    
+
         return () => {
             document.removeEventListener('click', handleDocumentClick);
         };
     }, [cartState]);
-    
-
-
-
-
 
     return (
         <header className={styles.header}>
@@ -68,16 +63,15 @@ export default function Header({ orders, onRemove, updateQuantity }) {
                         onClick={() => setCartState(cartState => !cartState)}
                         className={`${styles.cartIcon} ${cartState ? styles.active : ''}`} />
                 </nav>
-                
-            </div><CartModal
-                    orders={orders}
-                    onRemove={onRemove}
-                    onUpdateQuantity={updateQuantity}
-                    isOpen={cartState}
-                    onClose={() => setCartState(false)}
-                    totalPrice={totalPrice}
-                />
-                
+            </div>
+            <CartModal
+                orders={orders}
+                onRemove={onRemove}
+                onUpdateQuantity={updateQuantity}
+                isOpen={cartState}
+                onClose={() => setCartState(false)}
+                totalPrice={totalPrice}
+            />
             <div className={styles.banner}></div>
         </header>
     );

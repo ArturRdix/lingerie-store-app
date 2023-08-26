@@ -54,6 +54,22 @@ function App() {
       price: '1140',
       color: 'white'
     },
+    {
+      id: 7,
+      title: 'Черный комплект белья',
+      img: 'black_set.heic',
+      desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
+      price: '1140',
+      color: 'black'
+    },
+    {
+      id: 8,
+      title: 'Розовый комплект белья',
+      img: 'pink_set.heic',
+      desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
+      price: '1140',
+      color: 'pink'
+    },
   ]
 
   const [items, setItems] = useState(originslItems)

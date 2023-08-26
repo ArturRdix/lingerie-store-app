@@ -1,17 +1,17 @@
 .cartModal {
     position: fixed;
     top: 0;
-    right: -100%; /* Начальное положение за пределами экрана */
+    right: -100%; 
     width: 300px;
-    height: 100vh;
+    height: 100%;
     background-color: #fff;
     transition: right 0.3s ease;
-    z-index: 1000;
+    z-index: 1002220;
     box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
 .open {
-    right: 0; /* Показываем модальное окно */
+    right: 0; 
 }
 
 .cartHeader {
@@ -23,6 +23,11 @@
     border-bottom: 1px solid #ccc;
 }
 
+.totalPriceText {
+    font-size: 18px;
+    font-weight: 300;
+    float: left;
+}
 .cartTitle {
     margin: 0;
 }
@@ -34,9 +39,17 @@
 .cartItems {
     padding: 15px;
     overflow-y: auto;
-    height: calc(100% - 40px); /* Высота окна минус высота заголовка и отступов */
+    height: calc(85% - 40px); /* Высота окна минус высота заголовка и отступов */
 }
 
 .empty {
     font-weight: 100;
+}
+.submitOrderBlock{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+.submitButton{
+
 }

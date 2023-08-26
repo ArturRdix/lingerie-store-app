@@ -51,7 +51,9 @@
     width: 70px;
     float: left;
 }
-
+.trashIconBlock{
+    margin-left: auto;
+}
 .trashIcon {
     color: #d13030;
     cursor: pointer;

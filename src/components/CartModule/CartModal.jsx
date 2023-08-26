@@ -2,11 +2,16 @@ import React, { useEffect } from 'react';
 import OrderItem from '../OrderItem/OrderItem';
 import styles from './CartModal.module.css';
 
-export default function CartModal({ orders, onRemove, onUpdateQuantity, isOpen, totalPrice }) {
+export default function CartModal({ orders, onRemove, onUpdateQuantity, isOpen, onClose, totalPrice }) {
 
+    function handleModalClick(event) {
+        event.stopPropagation();
+    }
 
     return (
-        <div className={`${styles.cartModal} ${isOpen ? styles.open : ''}`}>
+        <div className={`${styles.cartModal} ${isOpen ? styles.open : ''}`}
+            onClick={handleModalClick}>
+
             <div className={styles.cartHeader}>
                 <h2 className={styles.cartTitle}>Корзина</h2>
             </div>
@@ -19,14 +24,16 @@ export default function CartModal({ orders, onRemove, onUpdateQuantity, isOpen, 
                             onRemove={onRemove}
                             onUpdateQuantity={onUpdateQuantity}
                         />
-                    ))
-
-                ) : (<h3 className={styles.empty}>Ваша корзина пуста</h3>)
-                }
-                {orders.length > 0 && (
-                                <b className={styles.totalPriceText}>Сумма: {totalPrice} грн.</b>
-                            )}
+                    ))) : (<h3 className={styles.empty}>Ваша корзина пуста</h3>)}
             </div>
+
+            {orders.length > 0 && (
+                <div className={styles.submitOrderBlock}>
+                    <b className={styles.totalPriceText}>Сумма: {totalPrice} грн.</b>
+                    <button className={styles.submitButton}>Оформить заказ</button>
+                </div>
+            )}
+
         </div>
     );
 }

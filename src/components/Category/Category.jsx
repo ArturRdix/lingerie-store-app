@@ -36,7 +36,7 @@ export default function Category({ colorCategory }) {
                 <div
                     className={styles.categoryItem}
                     key={el.key}
-                    onClick={()=>colorCategory(el.key)}>{el.name}</div>
+                    onClick={() => colorCategory(el.key)}>{el.name}</div>
             ))}
         </div>
     )
