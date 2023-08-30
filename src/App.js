@@ -3,6 +3,7 @@ import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Popup from './components/Popup/Popup';
 import Main from './Pages/Main';
+import Product from './Pages/Product';
 
 function App() {
   const originslItems = [
@@ -134,10 +135,11 @@ function App() {
         updateQuantity={updateQuantity}
         onRemove={removeFromOrder}
         orders={orders} />
+       {/* <Product/>*/}
       <Main
         colorCategory={colorCategory}
         onAdd={addToOrder}
-        items={items} />
+      items={items} />
       <Footer />
     </div>
   );

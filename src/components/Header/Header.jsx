@@ -72,7 +72,7 @@ export default function Header({ orders, onRemove, updateQuantity }) {
                 onClose={() => setCartState(false)}
                 totalPrice={totalPrice}
             />
-            <div className={styles.banner}></div>
+           {/* <div className={styles.banner}></div>*/}
         </header>
     );
 }

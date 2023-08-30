@@ -1,0 +1,31 @@
+.contentWrap {
+    display: flex;
+    gap: 20px;
+}
+
+.mainImg {
+    min-width: 400px;
+    height: 500px;
+    background-color: rebeccapurple;
+}
+.title{
+    margin-bottom: 10px;
+}
+.price{
+    margin-bottom: 20px;
+}
+.table{
+    font-size: 14px ;
+}
+.select {
+   outline: 0;
+    min-width: 140px;
+    letter-spacing: normal;
+    font-family: 'Oswald', 'sans-serif';
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-bottom: 1px solid silver;
+}
+.label{min-width: 110px;
+}

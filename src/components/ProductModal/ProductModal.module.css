@@ -1,0 +1,48 @@
+/* ProductModal.module.css */
+.modaleWindow {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(54, 54, 54, 0.426);
+    padding: 20px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999999;
+}
+
+.imgModalProduct {
+    width: 300px;
+}
+
+.modalContainer {
+    position: relative;
+    background-color: white;
+}
+
+.closeButton {
+    position: absolute;
+    bottom: 100%;
+    left: 100%;
+    font-size: 22px;
+    background: 0;
+    border: 0;
+    cursor: pointer;
+}
+
+.open {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.closed {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+    pointer-events: none;
+    /* Запретить события мыши для скрытого окна */
+}
