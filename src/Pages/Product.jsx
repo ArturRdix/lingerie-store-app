@@ -72,6 +72,7 @@ export default function Product() {
             </tr>
           </tbody>
         </table>
+        <button className={styles.addCartButton}> Добавить в корзину</button>
       </div>
     </div>
   )

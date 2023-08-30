@@ -36,8 +36,9 @@ export default function Header({ orders, onRemove, updateQuantity }) {
             const cartIconClicked = event.target.closest(`.${styles.cartIcon}`);
             const cartWindowClicked = event.target.closest(`.${styles.cartModal}`);
             const cartContentClicked = event.target.closest(`.${styles.cartItems}`);
+            const overlayClicked = event.target.closest(`.${styles.overlay}`);  // Добавляем эту строку
 
-            if (!cartWindowClicked && !cartContentClicked) {
+            if (!cartWindowClicked && !cartContentClicked && !overlayClicked) {
                 if (!cartIconClicked) {
                     setCartState(false);
                 }
@@ -59,9 +60,12 @@ export default function Header({ orders, onRemove, updateQuantity }) {
                     <a className={styles.itemNavigation} href="#">Каталог</a>
                     <a className={styles.itemNavigation} href="#">Про нас</a>
                     <a className={styles.itemNavigation} href="#">Контакты</a>
-                    <BsFillCartFill
-                        onClick={() => setCartState(cartState => !cartState)}
-                        className={`${styles.cartIcon} ${cartState ? styles.active : ''}`} />
+                    <div className={styles.cartBlock}>
+                        <BsFillCartFill
+                            onClick={() => setCartState(cartState => !cartState)}
+                            className={`${styles.cartIcon} ${cartState ? styles.active : ''}`} />
+                        {orders.length > 0 && <b className={styles.quantityOrders}>{orders.length}</b>}
+                    </div>
                 </nav>
             </div>
             <CartModal
@@ -72,7 +76,7 @@ export default function Header({ orders, onRemove, updateQuantity }) {
                 onClose={() => setCartState(false)}
                 totalPrice={totalPrice}
             />
-           {/* <div className={styles.banner}></div>*/}
+            {/* <div className={styles.banner}></div>*/}
         </header>
     );
 }

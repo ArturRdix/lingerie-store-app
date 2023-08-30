@@ -103,8 +103,10 @@ function App() {
       );
 
       setOrders(updatedOrders);
-    } else {
+    }
+    else {
       const updatedOrders = [...orders, { ...item, quantity: 1 }];
+
       setOrders(updatedOrders);
     }
 
@@ -135,11 +137,11 @@ function App() {
         updateQuantity={updateQuantity}
         onRemove={removeFromOrder}
         orders={orders} />
-       {/* <Product/>*/}
-      <Main
+       <Product/>
+      {/*<Main
         colorCategory={colorCategory}
         onAdd={addToOrder}
-      items={items} />
+        items={items} />*/}
       <Footer />
     </div>
   );
