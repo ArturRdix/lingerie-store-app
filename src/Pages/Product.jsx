@@ -10,21 +10,19 @@ export default function Product() {
         </div>
       </div>
       <div className={styles.rightInfoBlock}>
-        <h1 className={styles.title}>Неебический комлпект белья для товей шлюхи</h1>
-        <h3 className={styles.price}>999999грн</h3>
+        <h1 className={styles.title}>Нормальное название товара, Оле - не нравится</h1>
+        <h3 className={styles.price}>1999,00 грн</h3>
         <table className={styles.table}>
           <tbody>
             <tr>
               <td className={styles.label}>
-                <label htmlFor="forColor">Цвет</label>
+                <label htmlFor="forColor">Тип лифчика</label>
               </td>
               <td className={styles.value}>
                 <select className={styles.select} name="attributeColor" id="forColor">
                   <option value>Выберите опцию</option>
-                  <option value="">Красный</option>
-                  <option value="">Синий</option>
-                  <option value="">Чёрный</option>
-                  <option value="">Белый</option>
+                  <option value="">Класический</option>
+                  <option value="">Бралет</option>
                 </select>
               </td>
             </tr>
@@ -34,20 +32,6 @@ export default function Product() {
               </td>
               <td className={styles.value}>
                 <select className={styles.select} name="attributeSizeTop" id="forSizeTop">
-                  <option value>Выберите опцию</option>
-                  <option value="">XS</option>
-                  <option value="">S</option>
-                  <option value="">M</option>
-                  <option value="">L</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td className={styles.label}>
-                <label htmlFor="forSizeBottom">Размер низа</label>
-              </td>
-              <td className={styles.value}>
-                <select className={styles.select} name="attributeSizeBottom" id="forSizeBottom">
                   <option value>Выберите опцию</option>
                   <option value="">XS</option>
                   <option value="">S</option>
@@ -68,6 +52,38 @@ export default function Product() {
                   <option value="">Стринги</option>
                   <option value="">Стринги на регуляторах</option>
                 </select>
+              </td>
+            </tr>
+            <tr> <td className={styles.label}>
+              <label htmlFor="forSizeBottom">Размер низа</label>
+            </td>
+              <td className={styles.value}>
+                <select className={styles.select} name="attributeSizeBottom" id="forSizeBottom">
+                  <option value>Выберите опцию</option>
+                  <option value="">XS</option>
+                  <option value="">S</option>
+                  <option value="">M</option>
+                  <option value="">L</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Дополнителная опция:</strong>
+              </td>
+            </tr>
+            <tr className={styles.additionOption}>
+              <td className={styles.additionItem}>
+                <input type="checkbox" name="garter" id="optionalGarter" />
+                <label htmlFor="optionalGarter">Гартер</label>
+              </td>
+              <td className={styles.additionItem}>
+                <input type="checkbox" name="bell" id="optionalGarter" />
+                <label htmlFor="optionalBelt">Пояс</label>
+              </td>
+              <td className={styles.additionItem}>
+                <input type="checkbox" name="box" id="optionalBox" />
+                <label htmlFor="optionalBox">Подарочная упаковка</label>
               </td>
             </tr>
           </tbody>

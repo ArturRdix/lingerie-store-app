@@ -7,20 +7,26 @@
     min-width: 400px;
     height: 500px;
     background-color: rebeccapurple;
-}.rightInfoBlock{
+}
+
+.rightInfoBlock {
     display: flex;
-    flex-direction: column;align-items: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 20px;
 }
-.title{
+
+.title {
     line-height: 1;
 
 }
-.table{
-    font-size: 14px ;
+
+.table {
+    font-size: 16px;
 }
+
 .select {
-   outline: 0;
+    outline: 0;
     min-width: 140px;
     letter-spacing: normal;
     font-family: 'Oswald', 'sans-serif';
@@ -29,9 +35,12 @@
     -moz-appearance: none;
     border-bottom: 1px solid silver;
 }
-.label{min-width: 110px;
+
+.label {
+    min-width: 110px;
 }
-.addCartButton{
+
+.addCartButton {
     padding: 10px 15px;
     color: white;
     border: 0;
@@ -40,5 +49,12 @@
     letter-spacing: 1px;
     cursor: pointer;
 }
-.addCartButton:hover{
-    background: #343434;}
+
+.addCartButton:hover {
+    background: #343434;
+}
+
+.additionItem {
+    display: flex;
+    gap: 5px;
+}
