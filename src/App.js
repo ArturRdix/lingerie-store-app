@@ -154,6 +154,7 @@ function App() {
   };
 
   const addToOrder = (item) => {
+    console.log(item);
     const existingOrderItem = orders.find(orderItem => orderItem.id === item.id);
 
     if (existingOrderItem) {
@@ -198,12 +199,20 @@ function App() {
           onRemove={removeFromOrder}
           orders={orders} />
         <Routes>
-          <Route path='/product/:id' element={<Product item={items} />} />
+          <Route path='/product/:id'
+            element={
+              <Product
+                onAdd={addToOrder}
+                item={items} />
+            }
+          />
           <Route path='/'
-            element={<Main
-              colorCategory={colorCategory}
-              onAdd={addToOrder}
-              items={items} />}
+            element={
+              <Main
+                onAdd={addToOrder}
+                colorCategory={colorCategory}
+                items={items} />
+            }
           />
           <Route path='/dostavka' element={<Dostavka />} />
         </Routes>

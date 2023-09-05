@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import styles from './Product.module.css'
 
-export default function Product({ item }) {
+export default function Product({ item, onAdd }) {
   const { id } = useParams()
 
   return (
@@ -10,7 +10,7 @@ export default function Product({ item }) {
       <div className={styles.leftImgBlock}>
         <div className={styles.mainImg}>
           <div className={styles.img}>
-            <img className={styles.mainImg} src={"./../../product-images/" + item[id - 1].img} alt="" />
+            <img className={styles.mainImg} src={"../../product-images/" + item[id - 1].img} alt="" />
           </div>
         </div>
       </div>
@@ -68,8 +68,8 @@ export default function Product({ item }) {
               <label htmlFor="forSizeBottom">Размер низа</label>
             </td>
               <td className={styles.value}>
-                <select className={styles.select} name="attributeSizeBottom" id="forSizeBottom">
-                  <option value>Выберите опцию</option>
+                <select onChange={(e) => { console.log(e.target.value) }} className={styles.select} name="attributeSizeBottom" id="forSizeBottom">
+                  <option value=''>Выберите опцию</option>
                   {item[id - 1].option && item[id - 1].option.sizeBottom.map((el) => (
                     <option key={el.value} value={el.value}>
                       {el.label}
@@ -85,7 +85,7 @@ export default function Product({ item }) {
             </tr>
             <tr className={styles.additionOption}>
               <td className={styles.additionItem}>
-                <input type="checkbox" name="garter" id="optionalGarter" />
+                <input onChange={(e) => { e.target.checked && console.log('Добавить пояс') }} type="checkbox" name="garter" id="optionalGarter" />
                 <label htmlFor="optionalGarter">Гартер</label>
               </td>
               <td className={styles.additionItem}>
@@ -99,7 +99,7 @@ export default function Product({ item }) {
             </tr>
           </tbody>
         </table>
-        <button className={styles.addCartButton}> Добавить в корзину</button>
+        <button onClick={() => onAdd(item[id-1])} className={styles.addCartButton}> Добавить в корзину</button>
       </div>
     </div>
   )

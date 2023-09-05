@@ -6,6 +6,7 @@
     color: white;
     padding: 10px;
     border-radius: 5px;
+    top: 20%;
     opacity: 1;
     z-index: 10010;
     animation: slideInRight 0.5s forwards, fadeOut 1.5s 1.5s forwards;
