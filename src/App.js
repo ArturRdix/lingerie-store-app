@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Popup from './components/Popup/Popup';
+import Dostavka from './Pages/Dostavka';
 import Main from './Pages/Main';
 import Product from './Pages/Product';
 
@@ -13,8 +15,65 @@ function App() {
       img: 'blueWhite_set_lingerie.heic',
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
       price: '1200',
-      color: 'blue'
-    },
+      color: 'blue',
+      option: {
+        typeTop: [
+          {
+            value: 'classic',
+            label: 'Классический'
+          }, {
+            value: 'bralet',
+            label: 'Бралет'
+          },
+        ],
+        sizeTop: [
+          {
+            value: 'xs',
+            label: 'XS'
+          }, {
+            value: 's',
+            label: 'S'
+          }, {
+            value: 'm',
+            label: 'M'
+          }, {
+            value: 'l',
+            label: 'L'
+          },
+        ],
+        typeBottom: [
+          {
+            value: 'stringi',
+            label: 'Стринги'
+          }, {
+            value: 'stringiRegul',
+            label: 'Стринги на регуляторах'
+          }, {
+            value: 'brasilian',
+            label: 'Бразильяны'
+          }, {
+            value: 'brasilianRegul',
+            label: 'Бразильяны на регуляторах'
+          },
+        ],
+        sizeBottom: [
+          {
+            value: 'xs',
+            label: 'XS'
+          }, {
+            value: 's',
+            label: 'S'
+          }, {
+            value: 'm',
+            label: 'M'
+          }, {
+            value: 'l',
+            label: 'L'
+          },
+        ]
+      }
+    }
+    ,
     {
       id: 2,
       title: 'Персиковый комлпект белья',
@@ -133,15 +192,23 @@ function App() {
         />
       ))}
 
-      <Header
-        updateQuantity={updateQuantity}
-        onRemove={removeFromOrder}
-        orders={orders} />
-       <Product/>
-      {/*<Main
-        colorCategory={colorCategory}
-        onAdd={addToOrder}
-        items={items} />*/}
+      <main className='main-container'>
+        <Header
+          updateQuantity={updateQuantity}
+          onRemove={removeFromOrder}
+          orders={orders} />
+        <Routes>
+          <Route path='/product/:id' element={<Product item={items} />} />
+          <Route path='/'
+            element={<Main
+              colorCategory={colorCategory}
+              onAdd={addToOrder}
+              items={items} />}
+          />
+          <Route path='/dostavka' element={<Dostavka />} />
+        </Routes>
+      </main>
+
       <Footer />
     </div>
   );

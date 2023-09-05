@@ -1,20 +1,19 @@
 footer {
-    color: black;
+    color: #fff;
     width: 100%;
-    bottom: 0;
-    left: 0;
+    background: #222;
 }
 
 .footerNavigation {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 25px;
     margin: 10px 0;
 }
 
 .itemNavigation {
     font-size: 20px;
-    color: #222;
+    color: #fff;
     text-decoration: none;
     transition: 0.3s;
 }
@@ -31,4 +30,8 @@ footer {
 
 .itemNavigation:active {
     scale: 0.9;
+}
+
+.bottomBlock {
+    color: #fff;
 }

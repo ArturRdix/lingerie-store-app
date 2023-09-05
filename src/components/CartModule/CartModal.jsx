@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import OrderItem from '../OrderItem/OrderItem';
 import styles from './CartModal.module.css';
 
@@ -11,7 +11,6 @@ export default function CartModal({ orders, onRemove, onUpdateQuantity, onClose,
     return (
         <div className={`${styles.cartModal} ${isOpen ? styles.open : ''}`}
             onClick={handleModalClick}>
-            {/**/}
             <div className={styles.cartContent}>
                 <div className={styles.cartHeader}>
                     <h2 className={styles.cartTitle}>Корзина</h2>

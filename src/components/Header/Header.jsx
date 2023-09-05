@@ -1,7 +1,8 @@
-import styles from './Header.module.css'
 import React, { useState, useEffect } from 'react';
 import { BsFillCartFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 import CartModal from '../CartModule/CartModal';
+import styles from './Header.module.css'
 
 export default function Header({ orders, onRemove, updateQuantity }) {
     const [cartState, setCartState] = useState(false);
@@ -55,11 +56,11 @@ export default function Header({ orders, onRemove, updateQuantity }) {
     return (
         <header className={styles.header}>
             <div className={`${styles.topBlock} ${isFixed ? styles.fixedTopBlock : ''}`}>
-                <h1 className={styles.logo}>MONIKA LENGIRIE</h1>
+                <Link to='/'><h1 className={styles.logo}>MONIKA LENGERIE</h1></Link>
                 <nav className={styles.headerNavigation}>
-                    <a className={styles.itemNavigation} href="#">Каталог</a>
-                    <a className={styles.itemNavigation} href="#">Про нас</a>
-                    <a className={styles.itemNavigation} href="#">Контакты</a>
+                    <Link to='/dostavka' className={styles.itemNavigation} >Доставка и оплата</Link>
+                    <Link to='/pro-nas' className={styles.itemNavigation} >Про нас</Link>
+                    <Link to='/contact' className={styles.itemNavigation} >Контакты</Link>
                     <div className={styles.cartBlock}>
                         <BsFillCartFill
                             onClick={() => setCartState(cartState => !cartState)}

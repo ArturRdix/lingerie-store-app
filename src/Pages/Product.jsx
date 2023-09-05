@@ -1,17 +1,22 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
 import styles from './Product.module.css'
 
-export default function Product() {
+export default function Product({ item }) {
+  const { id } = useParams()
+
   return (
     <div className={styles.contentWrap}>
       <div className={styles.leftImgBlock}>
         <div className={styles.mainImg}>
-          <div className={styles.img}></div>
+          <div className={styles.img}>
+            <img className={styles.mainImg} src={"./../../product-images/" + item[id - 1].img} alt="" />
+          </div>
         </div>
       </div>
       <div className={styles.rightInfoBlock}>
-        <h1 className={styles.title}>Нормальное название товара, Оле - не нравится</h1>
-        <h3 className={styles.price}>1999,00 грн</h3>
+        <h1 className={styles.title}>{item[id - 1].title}</h1>
+        <h3 className={styles.price}>{item[id - 1].price},00 грн</h3>
         <table className={styles.table}>
           <tbody>
             <tr>
@@ -21,8 +26,11 @@ export default function Product() {
               <td className={styles.value}>
                 <select className={styles.select} name="attributeColor" id="forColor">
                   <option value>Выберите опцию</option>
-                  <option value="">Класический</option>
-                  <option value="">Бралет</option>
+                  {item[id - 1].option && item[id - 1].option.typeTop.map((el) => (
+                    <option key={el.value} value={el.value}>
+                      {el.label}
+                    </option>
+                  ))}
                 </select>
               </td>
             </tr>
@@ -33,10 +41,11 @@ export default function Product() {
               <td className={styles.value}>
                 <select className={styles.select} name="attributeSizeTop" id="forSizeTop">
                   <option value>Выберите опцию</option>
-                  <option value="">XS</option>
-                  <option value="">S</option>
-                  <option value="">M</option>
-                  <option value="">L</option>
+                  {item[id - 1].option && item[id - 1].option.sizeTop.map((el) => (
+                    <option key={el.value} value={el.value}>
+                      {el.label}
+                    </option>
+                  ))}
                 </select>
               </td>
             </tr>
@@ -47,10 +56,11 @@ export default function Product() {
               <td className={styles.value}>
                 <select className={styles.select} name="attributeUnderpants" id="forUnderpants">
                   <option value>Выберите опцию</option>
-                  <option value="">Бразильяны</option>
-                  <option value="">Бразильяны на регуляторах</option>
-                  <option value="">Стринги</option>
-                  <option value="">Стринги на регуляторах</option>
+                  {item[id - 1].option && item[id - 1].option.typeBottom.map((el) => (
+                    <option key={el.value} value={el.value}>
+                      {el.label}
+                    </option>
+                  ))}
                 </select>
               </td>
             </tr>
@@ -60,10 +70,11 @@ export default function Product() {
               <td className={styles.value}>
                 <select className={styles.select} name="attributeSizeBottom" id="forSizeBottom">
                   <option value>Выберите опцию</option>
-                  <option value="">XS</option>
-                  <option value="">S</option>
-                  <option value="">M</option>
-                  <option value="">L</option>
+                  {item[id - 1].option && item[id - 1].option.sizeBottom.map((el) => (
+                    <option key={el.value} value={el.value}>
+                      {el.label}
+                    </option>
+                  ))}
                 </select>
               </td>
             </tr>

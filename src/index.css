@@ -3,13 +3,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;600&display=swap');
 
 /*****Базовые стили*****/
+:root {
+    --main-color: #222;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Oswald', 'sans-serif';
+    text-decoration: none;
+    color: var(--main-color);
 }
-
+html,body,#root,.wrapper{height: 100%;}
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -19,29 +25,18 @@ input[type="number"]::-webkit-outer-spin-button {
 
 body {
     background-color: #fff;
-    color: #222;
+    color: var(--main-color);
     font-weight: 300;
 }
 
 .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main-container {
     width: 900px;
     margin: 30px auto;
     max-width: 90vw;
-}
-
-/*****Стилизация Header*****/
-
-
-
-
-
-
-
-
-main {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 1px;
 }

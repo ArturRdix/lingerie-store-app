@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styles from './ProductItem.module.css'
 
 export default function ProductItem({ item, onAdd }) {
@@ -9,9 +10,12 @@ export default function ProductItem({ item, onAdd }) {
             <h2 className={styles.itemTitle}>{item.title}</h2>
             <div className={styles.bottomBlock}>
                 <b className={styles.itemPrice}>{item.price}₴</b>
-                <div className={styles.addCart}
+                <Link to={`/product/${item.id}`}>
+                    <button className={styles.addCart}>Купить</button>
+                </Link>
+                {/*<div className={styles.addCart}
                     onClick={() => onAdd(item)}
-                >+</div>
+                >+</div>*/}
             </div>
         </div>
     )
