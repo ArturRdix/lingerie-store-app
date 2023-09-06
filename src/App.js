@@ -14,7 +14,7 @@ function App() {
       title: 'Голубой комлпект белья',
       img: 'blueWhite_set_lingerie.heic',
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: '1200',
+      price: 1200,
       color: 'blue',
       option: {
         typeTop: [
@@ -79,7 +79,7 @@ function App() {
       title: 'Персиковый комлпект белья',
       img: 'peach_set1.heic',
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: '980',
+      price: 980,
       color: 'pink'
     },
     {
@@ -87,7 +87,7 @@ function App() {
       title: 'Розовые трусы(на регуляторах)',
       img: 'pink_underpants.heic',
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: '550',
+      price: 550,
       color: 'pink'
     },
     {
@@ -95,7 +95,7 @@ function App() {
       title: 'Крсаный комплект белья',
       img: 'red_set_lingerie.heic',
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: '1050',
+      price: 1050,
       color: 'red'
     },
     {
@@ -103,7 +103,7 @@ function App() {
       title: 'Лифчики',
       img: 'redBlack-brssiere.heic',
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: '340',
+      price: 340,
       color: 'red'
     },
     {
@@ -111,7 +111,7 @@ function App() {
       title: 'Белый комплект белья',
       img: 'white_set_lingerie1.heic',
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: '1140',
+      price: 1140,
       color: 'white'
     },
     {
@@ -119,7 +119,7 @@ function App() {
       title: 'Черный комплект белья',
       img: 'black_set.heic',
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: '1140',
+      price: 1140,
       color: 'black'
     },
     {
@@ -127,7 +127,7 @@ function App() {
       title: 'Розовый комплект белья',
       img: 'pink_set.heic',
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: '1140',
+      price: 1140,
       color: 'pink'
     },
   ]
@@ -153,13 +153,13 @@ function App() {
     setOrders(updatedOrders);
   };
 
-  const addToOrder = (item) => {
+  const addToOrder = (item, addSum) => {
     console.log(item);
     const existingOrderItem = orders.find(orderItem => orderItem.id === item.id);
 
     if (existingOrderItem) {
       const updatedOrders = orders.map(orderItem =>
-        orderItem.id === item.id ? { ...orderItem, quantity: orderItem.quantity + 1 } : orderItem
+       ( orderItem.id === item.id ? { ...orderItem, quantity: orderItem.quantity + 1 } : orderItem)
       );
 
       setOrders(updatedOrders);
@@ -209,7 +209,6 @@ function App() {
           <Route path='/'
             element={
               <Main
-                onAdd={addToOrder}
                 colorCategory={colorCategory}
                 items={items} />
             }

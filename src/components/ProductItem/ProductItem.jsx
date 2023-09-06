@@ -13,9 +13,6 @@ export default function ProductItem({ item, onAdd }) {
                 <Link to={`/product/${item.id}`}>
                     <button className={styles.addCart}>Купить</button>
                 </Link>
-                <div className={styles.addCart}
-                    onClick={() => onAdd(item)}
-                >+</div>
             </div>
         </div>
     )

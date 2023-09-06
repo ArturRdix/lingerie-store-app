@@ -20,7 +20,7 @@ export default function OrderItem({ item, onRemove, onUpdateQuantity }) {
 
     return (
         <div className={styles.itemOrder}>
-            <img className={styles.itemImg} src={"./product-images/" + item.img} />
+            <img className={styles.itemImg} src={"/product-images/" + item.img} />
             <div className={styles.rightBlock}>
                 <h2 className={styles.itemTitle}>{item.title}</h2>
                 <b className={styles.itemPrice}>
