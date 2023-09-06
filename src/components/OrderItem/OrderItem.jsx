@@ -23,6 +23,11 @@ export default function OrderItem({ item, onRemove, onUpdateQuantity }) {
             <img className={styles.itemImg} src={"/product-images/" + item.img} />
             <div className={styles.rightBlock}>
                 <h2 className={styles.itemTitle}>{item.title}</h2>
+                <div className={styles.addDetalis}>
+                    {item.garter && <span>+Гартер</span>}
+                    {item.poyas && <span>+Пояс</span>}
+                    {item.box && <span>+Упаковка</span>}
+                </div>
                 <b className={styles.itemPrice}>
                     {inputQuantity > 1
                         ? `${item.price}₴ x ${inputQuantity} = ${item.price * inputQuantity}₴`

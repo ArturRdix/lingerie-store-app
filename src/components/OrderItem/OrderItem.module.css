@@ -49,11 +49,14 @@
 
 .itemImg {
     width: 70px;
+    max-height: 90px;
     float: left;
 }
-.trashIconBlock{
+
+.trashIconBlock {
     margin-left: auto;
 }
+
 .trashIcon {
     color: #d13030;
     cursor: pointer;
@@ -65,4 +68,8 @@
 
 .trashIcon:active {
     scale: 0.9;
+}
+
+.addDetalis span:not(:first-child) {
+    margin-left: 5px;
 }

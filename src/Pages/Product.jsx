@@ -167,7 +167,7 @@ export default function Product({ item, onAdd }) {
         </table>
         <button onClick={() => {
           console.log(selectedItem);
-          onAdd(selectedItem)
+          onAdd(selectedItem,addTotalSum)
         }} className={styles.addCartButton}> Добавить в корзину</button>
       </div>
     </div>

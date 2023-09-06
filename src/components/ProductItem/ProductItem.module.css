@@ -4,16 +4,15 @@
     margin-bottom: 50px;
     overflow: hidden;
     background-color: #f4f4f4;
+    cursor: pointer;
+    transition: .3s;
 }
-
+.item:active{
+    scale: 0.9;
+}
 .itemImg {
     width: 100%;
     transition: 0.3s;
-}
-
-.itemImg:hover {
-    cursor: pointer;
-    scale: 1.1;
 }
 
 .itemTitle,
@@ -40,24 +39,43 @@
 }
 
 .addCart {
-    font-size: 12px;
+    font-size: 18px;
     color: #fff;
     background: #222;
     border: 0;
-    padding: 5px 10px;
+    padding: 10px 20px;
     cursor: pointer;
     transition: 0.3s;
+    position: absolute;
+    top: 100%;
+    opacity: 0;
+    left: 50%;
+    border-radius: 0;
+    transform: translate(-50%, -50%);
+    z-index: 99999999;
 }
 
-.addCart:hover {
-    opacity: 90%;
-}
-
-.addCart:active {
+ .addCart:active {
     scale: 0.9;
 }
 
 .imageBlock {
     height: auto;
     overflow: hidden;
+    position: relative;
+}
+
+.item:hover .addCart {
+    opacity: 0.8;
+    top: 50%;
+}
+
+.addCart:hover {
+    opacity: 1 !important;
+    border-radius: 15px;
+}
+
+.item:hover .itemImg {
+    cursor: pointer;
+    scale: 1.1;
 }

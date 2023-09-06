@@ -159,19 +159,23 @@ function App() {
 
     if (existingOrderItem) {
       const updatedOrders = orders.map(orderItem =>
-       ( orderItem.id === item.id ? { ...orderItem, quantity: orderItem.quantity + 1 } : orderItem)
+        (orderItem.id === item.id ? { ...orderItem, quantity: orderItem.quantity + 1 } : orderItem)
       );
 
       setOrders(updatedOrders);
     }
     else {
-      const updatedOrders = [...orders, { ...item, quantity: 1 }];
+      // Создаем новый объект item с обновленным значением price
+      const updatedItem = { ...item, price: item.price + addSum };
+      
+      const updatedOrders = [...orders, { ...updatedItem, quantity: 1 }];
 
       setOrders(updatedOrders);
     }
 
     setPopups(prevPopups => [...prevPopups, `${item.title} добавлен в корзину`]);
-  };
+};
+
 
   const removeFromOrder = (item) => {
     const updatedOrders = orders.filter(orderItem => orderItem.id !== item.id);
