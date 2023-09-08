@@ -11,7 +11,7 @@ export default function ProductItem({ item, onAdd }) {
                     <Link to={`/product/${item.id}`}>
                         <button className={styles.addCart}>Купить</button>
                     </Link>
-                    <img className={styles.itemImg} src={"../../product-images/" + item.img} /></div>
+                    <img className={styles.itemImg} src={"../../product-images/" + item.img[0]} /></div>
                 <h2 className={styles.itemTitle}>{item.title}</h2>
                 <div className={styles.bottomBlock}>
                     <b className={styles.itemPrice}>{item.price}₴</b>

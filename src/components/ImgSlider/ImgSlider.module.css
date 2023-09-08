@@ -1,0 +1,45 @@
+.sliderContainer {
+    width: 400px;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+
+.slide {
+    flex: 0 0 100%;
+    width: 100%;
+}
+
+.img {
+    width: 100%;
+}
+
+.buttonSlide {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 56px;
+    border-radius: 50%;
+    border: 0;
+    width: 36px;
+    background: 0;
+    cursor: pointer;
+    color: #00000030;
+    transition: .3s;
+    transform-origin:center ;
+}
+        .sliderContainer:hover .buttonSlide{
+            color: #000000cb;
+        }
+
+.right {
+    left: 0;
+}
+
+.left {
+    right: 0;
+}

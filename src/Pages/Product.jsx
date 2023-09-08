@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styles from './Product.module.css'
+import ImgSlider from '../components/ImgSlider/ImgSlider';
 
 export default function Product({ item, onAdd }) {
   const { id } = useParams()
@@ -26,7 +27,7 @@ export default function Product({ item, onAdd }) {
       delete selectedItem.garter;
     }
   };
-  
+
   const handlePoyasChange = () => {
     setPoyas(!poyas);
     if (!poyas) {
@@ -37,7 +38,7 @@ export default function Product({ item, onAdd }) {
       delete selectedItem.poyas;
     }
   };
-  
+
   const handleBoxChange = () => {
     setBox(!box);
     if (!box) {
@@ -52,17 +53,13 @@ export default function Product({ item, onAdd }) {
   return (
     <div className={styles.contentWrap}>
       <div className={styles.leftImgBlock}>
-        <div className={styles.mainImg}>
-          <div className={styles.img}>
-            <img className={styles.mainImg} src={"/product-images/" + selectedItem.img} alt="" />
-          </div>
-        </div>
+        <ImgSlider imgItems={selectedItem.img} />
       </div>
       <div className={styles.rightInfoBlock}>
         <h1 className={styles.title}>{selectedItem.title}</h1>
         <h3 className={styles.price}>
-  {selectedItem.price},00 грн {addTotalSum > 0 && <span className={styles}>+{addTotalSum} грн</span>}
-</h3>
+          {selectedItem.price},00 грн {addTotalSum > 0 && <span className={styles}>+{addTotalSum} грн</span>}
+        </h3>
 
         <table className={styles.table}>
           <tbody>
@@ -167,7 +164,7 @@ export default function Product({ item, onAdd }) {
         </table>
         <button onClick={() => {
           console.log(selectedItem);
-          onAdd(selectedItem,addTotalSum)
+          onAdd(selectedItem, addTotalSum)
         }} className={styles.addCartButton}> Добавить в корзину</button>
       </div>
     </div>

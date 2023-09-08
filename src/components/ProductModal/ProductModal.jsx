@@ -22,7 +22,7 @@ export default function ProductModal({ product, onClose }) {
       </button>
       {product && (
         <>
-          <img className={styles.imgModalProduct} src={`../../product-images/${product.img}`} alt={product.title} />
+          <img className={styles.imgModalProduct} src={`../../product-images/${product.img[0]}`} alt={product.title} />
           <h2>{product.title}</h2>
           <p>{product.desc}</p>
           <p>Цена: {product.price}₴</p>

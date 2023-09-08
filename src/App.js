@@ -12,7 +12,7 @@ function App() {
     {
       id: 1,
       title: 'Голубой комлпект белья',
-      img: 'blueWhite_set_lingerie.heic',
+      img: ['blueWhite_set_lingerie.heic'],
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
       price: 1200,
       color: 'blue',
@@ -77,7 +77,7 @@ function App() {
     {
       id: 2,
       title: 'Персиковый комлпект белья',
-      img: 'peach_set1.heic',
+      img: ['peach_set1.heic','peach_set2.heic','peach_set3.heic'],
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
       price: 980,
       color: 'pink'
@@ -85,7 +85,7 @@ function App() {
     {
       id: 3,
       title: 'Розовые трусы(на регуляторах)',
-      img: 'pink_underpants.heic',
+      img: ['pink_underpants.heic'],
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
       price: 550,
       color: 'pink'
@@ -93,7 +93,7 @@ function App() {
     {
       id: 4,
       title: 'Крсаный комплект белья',
-      img: 'red_set_lingerie.heic',
+      img: ['red_set_lingerie.heic'],
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
       price: 1050,
       color: 'red'
@@ -101,7 +101,7 @@ function App() {
     {
       id: 5,
       title: 'Лифчики',
-      img: 'redBlack-brssiere.heic',
+      img: ['redBlack-brssiere.heic'],
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
       price: 340,
       color: 'red'
@@ -109,7 +109,7 @@ function App() {
     {
       id: 6,
       title: 'Белый комплект белья',
-      img: 'white_set_lingerie1.heic',
+      img: ['white_set_lingerie1.heic', 'white_set_lingerie2.heic', 'white_set_lingerie3.heic'],
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
       price: 1140,
       color: 'white'
@@ -117,7 +117,7 @@ function App() {
     {
       id: 7,
       title: 'Черный комплект белья',
-      img: 'black_set.heic',
+      img: ['black_set.heic'],
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
       price: 1140,
       color: 'black'
@@ -125,7 +125,7 @@ function App() {
     {
       id: 8,
       title: 'Розовый комплект белья',
-      img: 'pink_set.heic',
+      img: ['pink_set.heic'],
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
       price: 1140,
       color: 'pink'
@@ -167,14 +167,14 @@ function App() {
     else {
       // Создаем новый объект item с обновленным значением price
       const updatedItem = { ...item, price: item.price + addSum };
-      
+
       const updatedOrders = [...orders, { ...updatedItem, quantity: 1 }];
 
       setOrders(updatedOrders);
     }
 
     setPopups(prevPopups => [...prevPopups, `${item.title} добавлен в корзину`]);
-};
+  };
 
 
   const removeFromOrder = (item) => {
