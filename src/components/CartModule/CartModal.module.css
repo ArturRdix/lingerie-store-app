@@ -1,11 +1,11 @@
 .cartModal {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: -200%;
     width: 330px;
     height: 100%;
     transition: right 0.3s ease;
-    z-index: 1002220;
+    z-index: 100222000;
     box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.2);
 }
 

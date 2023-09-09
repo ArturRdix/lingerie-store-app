@@ -1,6 +1,6 @@
 .item {
     border-radius: 10px;
-    width: 20%;
+    width: 30%;
     margin-bottom: 50px;
     overflow: hidden;
     background-color: #f4f4f4;
@@ -52,7 +52,7 @@
     left: 50%;
     border-radius: 0;
     transform: translate(-50%, -50%);
-    z-index: 99999999;
+    z-index: 100;
 }
 
  .addCart:active {

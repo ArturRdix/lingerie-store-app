@@ -3,7 +3,11 @@
     overflow: hidden;
     position: relative;
 }
-
+@media screen and (max-width: 656px) {
+    .sliderContainer {
+        width: auto;
+    }
+}
 .slider {
     display: flex;
     transition: transform 0.3s ease-in-out;

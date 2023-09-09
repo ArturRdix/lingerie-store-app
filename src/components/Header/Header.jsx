@@ -20,12 +20,12 @@ export default function Header({ orders, onRemove, updateQuantity }) {
             }
         }
 
+        setTotalPrice(calculatedTotalPrice);
         function handleScroll() {
-            setIsFixed(window.scrollY > 100);
+            setIsFixed(window.scrollY > 1);
         }
 
         window.addEventListener('scroll', handleScroll);
-        setTotalPrice(calculatedTotalPrice);
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
@@ -37,7 +37,7 @@ export default function Header({ orders, onRemove, updateQuantity }) {
             const cartIconClicked = event.target.closest(`.${styles.cartIcon}`);
             const cartWindowClicked = event.target.closest(`.${styles.cartModal}`);
             const cartContentClicked = event.target.closest(`.${styles.cartItems}`);
-            const overlayClicked = event.target.closest(`.${styles.overlay}`);  // Добавляем эту строку
+            const overlayClicked = event.target.closest(`.${styles.overlay}`);  
 
             if (!cartWindowClicked && !cartContentClicked && !overlayClicked) {
                 if (!cartIconClicked) {
@@ -68,6 +68,9 @@ export default function Header({ orders, onRemove, updateQuantity }) {
                         {orders.length > 0 && <b className={styles.quantityOrders}>{orders.length}</b>}
                     </div>
                 </nav>
+                {/* <div className={styles.burgerMenuNavigation}>
+                    <span className={styles.middleLine}></span>
+                </div> */}
             </div>
             <CartModal
                 orders={orders}
