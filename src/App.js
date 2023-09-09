@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
@@ -77,7 +77,7 @@ function App() {
     {
       id: 2,
       title: 'Персиковый комлпект белья',
-      img: ['peach_set1.heic','peach_set2.heic','peach_set3.heic'],
+      img: ['peach_set1.heic', 'peach_set2.heic', 'peach_set3.heic'],
       desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
       price: 980,
       color: 'pink'
@@ -131,8 +131,32 @@ function App() {
       color: 'pink'
     },
   ]
+  const [isFixed, setIsFixed] = useState(false);
+  useEffect(() => {
+    function handleScroll() {
+      const wrapper = document.querySelector('.wrapper');
+      if (wrapper.scrollTop >= 200) {
+        console.log('Прокрутили на 1000 пикселей вниз');
+        setIsFixed(true)
 
-  
+      } else {
+        setIsFixed(false)
+      }
+    }
+
+    const wrapper = document.querySelector('.wrapper');
+    wrapper.addEventListener('scroll', handleScroll);
+
+    return () => {
+      wrapper.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
+
+
+
+
 
   const [items, setItems] = useState(originslItems)
   const [orders, setOrders] = useState([]);
@@ -201,6 +225,7 @@ function App() {
 
       <main className='main-container'>
         <Header
+          fixed={isFixed}
           updateQuantity={updateQuantity}
           onRemove={removeFromOrder}
           orders={orders} />

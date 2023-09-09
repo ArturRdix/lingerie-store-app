@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import CartModal from '../CartModule/CartModal';
 import styles from './Header.module.css'
 
-export default function Header({ orders, onRemove, updateQuantity }) {
+export default function Header({ orders, onRemove, updateQuantity, fixed }) {
     const [cartState, setCartState] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [isFixed, setIsFixed] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
 
     useEffect(() => {
         let calculatedTotalPrice = 0;
@@ -21,15 +22,6 @@ export default function Header({ orders, onRemove, updateQuantity }) {
         }
 
         setTotalPrice(calculatedTotalPrice);
-        function handleScroll() {
-            setIsFixed(window.scrollY > 1);
-        }
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
     }, [orders]);
 
     useEffect(() => {
@@ -37,7 +29,7 @@ export default function Header({ orders, onRemove, updateQuantity }) {
             const cartIconClicked = event.target.closest(`.${styles.cartIcon}`);
             const cartWindowClicked = event.target.closest(`.${styles.cartModal}`);
             const cartContentClicked = event.target.closest(`.${styles.cartItems}`);
-            const overlayClicked = event.target.closest(`.${styles.overlay}`);  
+            const overlayClicked = event.target.closest(`.${styles.overlay}`);
 
             if (!cartWindowClicked && !cartContentClicked && !overlayClicked) {
                 if (!cartIconClicked) {
@@ -55,22 +47,28 @@ export default function Header({ orders, onRemove, updateQuantity }) {
 
     return (
         <header className={styles.header}>
-            <div className={`${styles.topBlock} ${isFixed ? styles.fixedTopBlock : ''}`}>
+            <div className={`${styles.topBlock} ${fixed ? styles.fixedTopBlock : ''}`}>
                 <Link to='/'><h1 className={styles.logo}>MONIKA LENGERIE</h1></Link>
-                <nav className={styles.headerNavigation}>
+
+                <div className={`${styles.burgerMenuNavigation} ${isMenuOpen ? styles.burgerMenuOpen : ''}`}
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                    <span className={`${styles.middleLine} ${isMenuOpen?styles.middleLineNone:''}`}></span>
+                </div>
+
+                <nav className={`${styles.headerNavigation} ${isMenuOpen ? styles.menuOpen : ''}`}>
                     <Link to='/dostavka' className={styles.itemNavigation} >Доставка и оплата</Link>
                     <Link to='/pro-nas' className={styles.itemNavigation} >Про нас</Link>
                     <Link to='/contact' className={styles.itemNavigation} >Контакты</Link>
+
                     <div className={styles.cartBlock}>
                         <BsFillCartFill
                             onClick={() => setCartState(cartState => !cartState)}
                             className={`${styles.cartIcon} ${cartState ? styles.active : ''}`} />
                         {orders.length > 0 && <b className={styles.quantityOrders}>{orders.length}</b>}
                     </div>
+
                 </nav>
-                {/* <div className={styles.burgerMenuNavigation}>
-                    <span className={styles.middleLine}></span>
-                </div> */}
+
             </div>
             <CartModal
                 orders={orders}

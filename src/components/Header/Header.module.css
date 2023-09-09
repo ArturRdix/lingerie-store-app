@@ -8,6 +8,11 @@
     padding: 10px;
 }
 
+.header {
+    margin-bottom: 30px;
+    position: relative;
+}
+
 .empty {
     font-weight: 100;
 }
@@ -26,14 +31,14 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    position: relative;
     margin-bottom: 30px;
-    transition: top 0.7s;
+    transition: 0.8s;
+    position: relative;
 }
 
 .fixedTopBlock {
     width: 100%;
-    padding: 20px;
+    padding: 20px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,7 +48,7 @@
     left: 0;
     background-color: #fff;
     z-index: 100000;
-    transition: 0.3s;
+    transition: 0.8s;
 }
 
 .cartIcon {
@@ -80,6 +85,7 @@
     top: 1.6em;
     width: 20%;
     border-bottom: 1px solid;
+    border: 100%;
     content: "";
     z-index: 1;
     opacity: 0;
@@ -159,7 +165,7 @@
     left: 50%;
 }
 
-/* 
+
 .burgerMenuNavigation {
     display: none;
     position: relative;
@@ -175,6 +181,8 @@
     width: 100%;
     height: 3px;
     left: 0;
+    transform-origin: center;
+    transition: .3s;
 }
 
 .middleLine {
@@ -185,6 +193,7 @@
     left: 0;
     top: 50%;
     transform: translateY(-50%);
+    transition: .3s;
 }
 
 .burgerMenuNavigation::before {
@@ -197,13 +206,38 @@
 
 @media screen and (max-width: 656px) {
     .headerNavigation {
-        display: none;
+        display: flex;
+        float: left;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 10;
+        background: white;
+        width: 100%;
+        flex-direction: column;
+        transform-origin: top;
+        transform: rotateX(90deg);
+        transition: 0.3s;
     }
 
+    .menuOpen {
+        transform: rotateX(0deg);
+    }
+
+    .burgerMenuOpen::before {
+        top: 50%;
+        transform: translateY(-50%)rotate(45deg);;
+    }
+
+    .burgerMenuOpen::after {
+        bottom: 50%;
+        transform: translateY(50%)rotate(-45deg);;
+    }
+    .middleLineNone{
+        left: 100%;
+        opacity: 0;
+    }
     .burgerMenuNavigation {
         display: block;
     }
-    .burgerMenuNavigation:active{
-        
-    }
-} */
+}
