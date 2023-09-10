@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Popup from './components/Popup/Popup';
 import Dostavka from './Pages/Dostavka';
 import Main from './Pages/Main';
 import Product from './Pages/Product';
-import axios from 'axios';
 
 function App() {
-  
   const [originslItems, setOriginslItems] = useState([])
   const [items, setItems] = useState(originslItems)
   const [orders, setOrders] = useState([]);
   const [popups, setPopups] = useState([]);
 
   useEffect(() => {
-    const getItems = async () => {
+    (async () => {
       try {
         const response = await fetch('http://localhost:3030/api/products');
         const data = await response.json();
@@ -24,10 +22,14 @@ function App() {
       } catch (error) {
         console.error(error);
       }
-    };
-    getItems();
+    })();
   }, []);
 
+  useEffect(() => {
+    setItems(originslItems)
+  }, [originslItems])
+
+  
   const colorCategory = (category) => {
     if (category === 'all') {
       setItems(originslItems);
@@ -35,7 +37,6 @@ function App() {
       setItems(originslItems.filter(item => item.color === category));
     }
   };
-
 
   const updateQuantity = (itemId, newQuantity) => {
     const updatedOrders = orders.map(orderItem =>
@@ -67,7 +68,6 @@ function App() {
     setPopups(prevPopups => [...prevPopups, `${item.title} добавлен в корзину`]);
   };
 
-
   const removeFromOrder = (item) => {
     const updatedOrders = orders.filter(orderItem => orderItem.id !== item.id);
     setOrders(updatedOrders);
@@ -76,6 +76,11 @@ function App() {
   const closePopup = (index) => {
     setPopups(prevPopups => prevPopups.filter((_, i) => i !== index));
   };
+
+  const wrapper = document.querySelector('.wrapper');
+  if (wrapper) {
+    wrapper.scrollTo(0, 0);
+  }
   return (
     <div className="wrapper">
       {popups.map((popup, index) => (
@@ -93,6 +98,7 @@ function App() {
           onRemove={removeFromOrder}
           orders={orders} />
         <Routes>
+
           <Route path='/product/:id'
             element={
               <Product
@@ -110,7 +116,7 @@ function App() {
           <Route path='/dostavka' element={<Dostavka />} />
         </Routes>
       </main>
-
+            
       <Footer />
     </div>
   );

@@ -8,7 +8,7 @@ export default function ProductItem({ item}) {
             <Link to={`/product/${item.id}`}>
                 <div className={styles.imageBlock}>
                     <button className={styles.addCart}>Купить</button>
-                    <img className={styles.itemImg} src={"../../product-images/" + item.img[0]} alt={item.title} />
+                    <img className={styles.itemImg} src={item.img[0]} alt={item.title} />
                 </div>
                 <h2 className={styles.itemTitle}>{item.title}</h2>
                 <div className={styles.bottomBlock}>

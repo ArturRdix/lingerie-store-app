@@ -2,6 +2,11 @@ import React from 'react'
 import styles from './Dostavka.module.css'
 
 export default function Dostavka() {
+  const wrapper = document.querySelector('.wrapper');
+  if (wrapper) {
+    wrapper.scrollTo(0, 0);
+  }
+
   return (
     <div className={styles.wrapper}>
       <p className={styles}>Наш інтернет-магазин MONIKA LENGERIE надсилає покупки по всій території України.</p>
