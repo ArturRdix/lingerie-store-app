@@ -6,161 +6,27 @@ import Popup from './components/Popup/Popup';
 import Dostavka from './Pages/Dostavka';
 import Main from './Pages/Main';
 import Product from './Pages/Product';
+import axios from 'axios';
 
 function App() {
-  const originslItems = [
-    {
-      id: 1,
-      title: 'Голубой комлпект белья',
-      img: ['blueWhite_set_lingerie.heic'],
-      desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: 1200,
-      color: 'blue',
-      option: {
-        typeTop: [
-          {
-            value: 'classic',
-            label: 'Классический'
-          }, {
-            value: 'bralet',
-            label: 'Бралет'
-          },
-        ],
-        sizeTop: [
-          {
-            value: 'xs',
-            label: 'XS'
-          }, {
-            value: 's',
-            label: 'S'
-          }, {
-            value: 'm',
-            label: 'M'
-          }, {
-            value: 'l',
-            label: 'L'
-          },
-        ],
-        typeBottom: [
-          {
-            value: 'stringi',
-            label: 'Стринги'
-          }, {
-            value: 'stringiRegul',
-            label: 'Стринги на регуляторах'
-          }, {
-            value: 'brasilian',
-            label: 'Бразильяны'
-          }, {
-            value: 'brasilianRegul',
-            label: 'Бразильяны на регуляторах'
-          },
-        ],
-        sizeBottom: [
-          {
-            value: 'xs',
-            label: 'XS'
-          }, {
-            value: 's',
-            label: 'S'
-          }, {
-            value: 'm',
-            label: 'M'
-          }, {
-            value: 'l',
-            label: 'L'
-          },
-        ]
-      }
-    }
-    ,
-    {
-      id: 2,
-      title: 'Персиковый комлпект белья',
-      img: ['peach_set1.heic', 'peach_set2.heic', 'peach_set3.heic'],
-      desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: 980,
-      color: 'pink'
-    },
-    {
-      id: 3,
-      title: 'Розовые трусы(на регуляторах)',
-      img: ['pink_underpants.heic'],
-      desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: 550,
-      color: 'pink'
-    },
-    {
-      id: 4,
-      title: 'Крсаный комплект белья',
-      img: ['red_set_lingerie.heic'],
-      desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: 1050,
-      color: 'red'
-    },
-    {
-      id: 5,
-      title: 'Лифчики',
-      img: ['redBlack-brssiere.heic'],
-      desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: 340,
-      color: 'red'
-    },
-    {
-      id: 6,
-      title: 'Белый комплект белья',
-      img: ['white_set_lingerie1.heic', 'white_set_lingerie2.heic', 'white_set_lingerie3.heic'],
-      desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: 1140,
-      color: 'white'
-    },
-    {
-      id: 7,
-      title: 'Черный комплект белья',
-      img: ['black_set.heic'],
-      desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: 1140,
-      color: 'black'
-    },
-    {
-      id: 8,
-      title: 'Розовый комплект белья',
-      img: ['pink_set.heic'],
-      desc: 'Тут какое-то краткое описание, материалы белья и прочее-прочее',
-      price: 1140,
-      color: 'pink'
-    },
-  ]
-  const [isFixed, setIsFixed] = useState(false);
-  useEffect(() => {
-    function handleScroll() {
-      const wrapper = document.querySelector('.wrapper');
-      if (wrapper.scrollTop >= 200) {
-        console.log('Прокрутили на 1000 пикселей вниз');
-        setIsFixed(true)
-
-      } else {
-        setIsFixed(false)
-      }
-    }
-
-    const wrapper = document.querySelector('.wrapper');
-    wrapper.addEventListener('scroll', handleScroll);
-
-    return () => {
-      wrapper.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-
-
-
-
-
-
+  
+  const [originslItems, setOriginslItems] = useState([])
   const [items, setItems] = useState(originslItems)
   const [orders, setOrders] = useState([]);
   const [popups, setPopups] = useState([]);
+
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const response = await fetch('http://localhost:3030/api/products');
+        const data = await response.json();
+        setOriginslItems(data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getItems();
+  }, []);
 
   const colorCategory = (category) => {
     if (category === 'all') {
@@ -191,7 +57,6 @@ function App() {
       setOrders(updatedOrders);
     }
     else {
-      // Создаем новый объект item с обновленным значением price
       const updatedItem = { ...item, price: item.price + addSum };
 
       const updatedOrders = [...orders, { ...updatedItem, quantity: 1 }];
@@ -211,7 +76,6 @@ function App() {
   const closePopup = (index) => {
     setPopups(prevPopups => prevPopups.filter((_, i) => i !== index));
   };
-
   return (
     <div className="wrapper">
       {popups.map((popup, index) => (
@@ -225,7 +89,6 @@ function App() {
 
       <main className='main-container'>
         <Header
-          fixed={isFixed}
           updateQuantity={updateQuantity}
           onRemove={removeFromOrder}
           orders={orders} />

@@ -8,9 +8,13 @@
     padding: 10px;
 }
 
-.header {
-    margin-bottom: 30px;
-    position: relative;
+.header {    position: fixed;
+    width: 100%;
+    padding: 20px 0;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 10000;    border-bottom: 1px solid var(--main-color);
 }
 
 .empty {
@@ -31,12 +35,13 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    margin-bottom: 30px;
     transition: 0.8s;
-    position: relative;
+    margin: 0 auto;
+    max-width: 90vw;
+    width: 900px;
 }
 
-.fixedTopBlock {
+/* .fixedTopBlock {
     width: 100%;
     padding: 20px 50px;
     display: flex;
@@ -49,7 +54,7 @@
     background-color: #fff;
     z-index: 100000;
     transition: 0.8s;
-}
+} */
 
 .cartIcon {
     color: #222;
@@ -226,18 +231,26 @@
 
     .burgerMenuOpen::before {
         top: 50%;
-        transform: translateY(-50%)rotate(45deg);;
+        transform: translateY(-50%)rotate(45deg);
+        ;
     }
 
     .burgerMenuOpen::after {
         bottom: 50%;
-        transform: translateY(50%)rotate(-45deg);;
+        transform: translateY(50%)rotate(-45deg);
+        ;
     }
-    .middleLineNone{
+
+    .middleLineNone {
         left: 100%;
         opacity: 0;
     }
+
     .burgerMenuNavigation {
         display: block;
+    }.header{
+        padding: 10px 0;
+    }.logo{
+        font-size: 23px;
     }
 }

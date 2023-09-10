@@ -45,6 +45,6 @@ body {
 
 .main-container {
     width: 900px;
-    margin: 30px auto;
+    margin: 100px auto 30px;
     max-width: 90vw;
 }

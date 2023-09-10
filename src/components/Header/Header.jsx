@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import CartModal from '../CartModule/CartModal';
 import styles from './Header.module.css'
 
-export default function Header({ orders, onRemove, updateQuantity, fixed }) {
+export default function Header({ orders, onRemove, updateQuantity }) {
     const [cartState, setCartState] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,7 +47,7 @@ export default function Header({ orders, onRemove, updateQuantity, fixed }) {
 
     return (
         <header className={styles.header}>
-            <div className={`${styles.topBlock} ${fixed ? styles.fixedTopBlock : ''}`}>
+            <div className={styles.topBlock}>
                 <Link to='/'><h1 className={styles.logo}>MONIKA LENGERIE</h1></Link>
 
                 <div className={`${styles.burgerMenuNavigation} ${isMenuOpen ? styles.burgerMenuOpen : ''}`}
