@@ -6,13 +6,19 @@ import Popup from './components/Popup/Popup';
 import Dostavka from './Pages/Dostavka';
 import Main from './Pages/Main';
 import Product from './Pages/Product';
+import Contact from './Pages/Contact';
+import ProNas from './Pages/ProNas';
 
 function App() {
-  const [originslItems, setOriginslItems] = useState([])
-  const [items, setItems] = useState(originslItems)
-  const [orders, setOrders] = useState([]);
-  const [popups, setPopups] = useState([]);
+  // Инициализация переменных состояния
+  const [originslItems, setOriginslItems] = useState([]); // Исходные товары из API
+  const [items, setItems] = useState(originslItems); // Отфильтрованные товары, отображаемые на странице
+  const [orders, setOrders] = useState([]); // Товары в корзине пользователя
+  const [popups, setPopups] = useState([]); // Всплывающие сообщения
+  const [selectedColor, setSelectedColor] = useState('all'); // Выбранный цвет товара
+  const [selectedType, setSelectedType] = useState('all'); // Выбранный тип товара
 
+  // Загрузка данных с сервера при загрузке компонента
   useEffect(() => {
     (async () => {
       try {
@@ -25,19 +31,31 @@ function App() {
     })();
   }, []);
 
+  // Обновление списка товаров при изменении исходных товаров
   useEffect(() => {
-    setItems(originslItems)
-  }, [originslItems])
+    setItems(originslItems);
+  }, [originslItems]);
 
-  
-  const colorCategory = (category) => {
-    if (category === 'all') {
-      setItems(originslItems);
-    } else {
-      setItems(originslItems.filter(item => item.color === category));
+  // Фильтрация товаров по выбранным параметрам (цене,цвету и типу)
+  useEffect(() => {
+    const currentPath = window.location.pathname;
+    if (currentPath !== '/') { // Проверьте, что это не главная страница
+      setSelectedColor('all');
+      setSelectedType('all');
     }
-  };
 
+    const filteredItems = originslItems.filter(item => {
+
+      const isColorMatch = selectedColor === 'all' || item.color === selectedColor;
+      const isTypeMatch = selectedType === 'all' || item.type === selectedType;
+
+      return isColorMatch && isTypeMatch;
+    });
+
+    setItems(filteredItems);
+  }, [selectedColor, selectedType, originslItems]);
+
+  // Обновление количества товара в корзине
   const updateQuantity = (itemId, newQuantity) => {
     const updatedOrders = orders.map(orderItem =>
       orderItem.id === itemId ? { ...orderItem, quantity: newQuantity } : orderItem
@@ -46,6 +64,7 @@ function App() {
     setOrders(updatedOrders);
   };
 
+  // Добавление товара в корзину
   const addToOrder = (item, addSum) => {
     console.log(item);
     const existingOrderItem = orders.find(orderItem => orderItem.id === item.id);
@@ -56,8 +75,7 @@ function App() {
       );
 
       setOrders(updatedOrders);
-    }
-    else {
+    } else {
       const updatedItem = { ...item, price: item.price + addSum };
 
       const updatedOrders = [...orders, { ...updatedItem, quantity: 1 }];
@@ -68,19 +86,17 @@ function App() {
     setPopups(prevPopups => [...prevPopups, `${item.title} добавлен в корзину`]);
   };
 
+  // Удаление товара из корзины
   const removeFromOrder = (item) => {
     const updatedOrders = orders.filter(orderItem => orderItem.id !== item.id);
     setOrders(updatedOrders);
   };
 
+  // Закрытие всплывающего окна
   const closePopup = (index) => {
     setPopups(prevPopups => prevPopups.filter((_, i) => i !== index));
   };
 
-  const wrapper = document.querySelector('.wrapper');
-  if (wrapper) {
-    wrapper.scrollTo(0, 0);
-  }
   return (
     <div className="wrapper">
       {popups.map((popup, index) => (
@@ -96,27 +112,32 @@ function App() {
         <Header
           updateQuantity={updateQuantity}
           onRemove={removeFromOrder}
-          orders={orders} />
+          orders={orders}
+        />
         <Routes>
-
           <Route path='/product/:id'
             element={
               <Product
                 onAdd={addToOrder}
-                item={items} />
+                item={items}
+              />
             }
           />
           <Route path='/'
             element={
               <Main
-                colorCategory={colorCategory}
-                items={items} />
+                typeCategory={setSelectedType}
+                colorCategory={setSelectedColor}
+                items={items}
+              />
             }
           />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/pro-nas' element={<ProNas />} />
           <Route path='/dostavka' element={<Dostavka />} />
         </Routes>
       </main>
-            
+
       <Footer />
     </div>
   );

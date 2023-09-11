@@ -1,19 +1,20 @@
 import React from 'react'
 import styles from './Footer.module.css'
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
     return (
         <footer>
             <div className={styles.topBlock}>
                 <nav className={styles.footerNavigation}>
-                    <a className={styles.itemNavigation} href="#">О НАС</a>
-                    <a className={styles.itemNavigation} href="#">ОПЛАТА И ДОСТАВКА</a>
-                    <a className={styles.itemNavigation} href="#">КОНТАКТЫ</a>
+                    <Link to='/dostavka' className={styles.itemNavigation} >ДОСТАВКА И ОПЛАТА</Link>
+                    <Link to='/pro-nas' className={styles.itemNavigation} >ПРО НАС</Link>
+                    <Link to='/contact' className={styles.itemNavigation} >КОНТАКТЫ</Link>
                     <a className=
-                    {`${styles.itemNavigation} ${styles.itemInstagram}`} 
-                    href="https://www.instagram.com/monika.lingeriee/">INSTAGRAM</a>
+                        {`${styles.itemNavigation} ${styles.itemInstagram}`}
+                        href="https://www.instagram.com/monika.lingeriee/">INSTAGRAM</a>
                 </nav>
-                </div>
+            </div>
             <div className={styles.bottomBlock}>
                 Все права защищены &copy;
             </div>

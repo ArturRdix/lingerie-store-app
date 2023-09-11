@@ -17,7 +17,7 @@ export default function ImgSlider({ imgItems }) {
             <div className={styles.slider} style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
                 {imgItems.map((el, index) => (
                     <div key={index} className={styles.slide}>
-                        <img className={styles.img} src={"/product-images/" + el} alt="" />
+                        <img className={styles.img} src={el} alt="" />
                     </div>
                 ))}
             </div>
