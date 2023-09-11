@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Category from '../components/Category/Category'
 import ProductList from '../components/ProductList'
 
-export default function Main({ typeCategory, colorCategory, onAdd, items }) {
+export default function Main({ priceFilter,typeCategory, colorCategory, onAdd, items }) {
 
   // Прокрутка страницы в начало
   const wrapper = document.querySelector('.wrapper');
@@ -16,9 +16,12 @@ export default function Main({ typeCategory, colorCategory, onAdd, items }) {
     colorCategory('all'); // Сброс цвета товара
   }, []);
 
+  
+
   return (
     <div className='wrapper'>
       <Category
+      priceFilter={priceFilter}
         typeCategory={typeCategory}
         colorCategory={colorCategory} />
       <ProductList onAdd={onAdd} items={items} />

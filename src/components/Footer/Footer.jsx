@@ -8,7 +8,7 @@ export default function Footer() {
             <div className={styles.topBlock}>
                 <nav className={styles.footerNavigation}>
                     <Link to='/dostavka' className={styles.itemNavigation} >ДОСТАВКА И ОПЛАТА</Link>
-                    <Link to='/pro-nas' className={styles.itemNavigation} >ПРО НАС</Link>
+                    <Link to='/pro-nas' className={styles.itemNavigation} >О НАС</Link>
                     <Link to='/contact' className={styles.itemNavigation} >КОНТАКТЫ</Link>
                     <a className=
                         {`${styles.itemNavigation} ${styles.itemInstagram}`}

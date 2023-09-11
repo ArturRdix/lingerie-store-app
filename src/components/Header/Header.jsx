@@ -48,7 +48,7 @@ export default function Header({ orders, onRemove, updateQuantity }) {
     return (
         <header className={styles.header}>
             <div className={styles.topBlock}>
-                <Link to='/'><h1 className={styles.logo}>MONIKA LENGERIE</h1></Link>
+                <Link to='/'><h1 className={styles.logo}>MONIKA LINGERIE</h1></Link>
 
                 <div className={`${styles.burgerMenuNavigation} ${isMenuOpen ? styles.burgerMenuOpen : ''}`}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -57,7 +57,7 @@ export default function Header({ orders, onRemove, updateQuantity }) {
 
                 <nav className={`${styles.headerNavigation} ${isMenuOpen ? styles.menuOpen : ''}`}>
                     <Link to='/dostavka' className={styles.itemNavigation} >Доставка и оплата</Link>
-                    <Link to='/pro-nas' className={styles.itemNavigation} >Про нас</Link>
+                    <Link to='/pro-nas' className={styles.itemNavigation} >О нас</Link>
                     <Link to='/contact' className={styles.itemNavigation} >Контакты</Link>
 
                     <div className={styles.cartBlock}>

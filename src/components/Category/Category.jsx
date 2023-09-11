@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import styles from './Category.module.css'
 
-export default function Category({ colorCategory, typeCategory }) {
+export default function Category({priceFilter, colorCategory, typeCategory }) {
     const [colors, setColors] = useState([
         {
             key: 'all',
@@ -47,9 +47,36 @@ export default function Category({ colorCategory, typeCategory }) {
             name: 'Лифчики'
         }
     ])
+    const[price,setPrice]=useState([
+        {
+            key: 'default',
+            name: 'По-умолчанию'
+        },
+        {
+            key: 'priceUp',
+            name: 'По-возрастанию'
+        },
+        {
+            key: 'priceDown',
+            name: 'По-убыванию'
+        }
+    ])
 
     return (
         <div className={styles.categorys}>
+
+            <div className={styles.selectBlock}>
+                <label htmlFor="types">Цена: </label>
+                <select className={styles} onChange={(el) => priceFilter(el.target.value)} name="" id="types">
+                    {price.map(el => (
+                        <option
+                            value={el.key}
+                            key={el.key}
+                        >{el.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
 
             <div className={styles.selectBlock}>
                 <label htmlFor="colors">Цвет: </label>

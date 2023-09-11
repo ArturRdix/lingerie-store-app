@@ -17,6 +17,7 @@ function App() {
   const [popups, setPopups] = useState([]); // Всплывающие сообщения
   const [selectedColor, setSelectedColor] = useState('all'); // Выбранный цвет товара
   const [selectedType, setSelectedType] = useState('all'); // Выбранный тип товара
+  const [selectedPrice, setSelectedPrice] = useState('default')
 
   // Загрузка данных с сервера при загрузке компонента
   useEffect(() => {
@@ -38,22 +39,39 @@ function App() {
 
   // Фильтрация товаров по выбранным параметрам (цене,цвету и типу)
   useEffect(() => {
-    const currentPath = window.location.pathname;
-    if (currentPath !== '/') { // Проверьте, что это не главная страница
+    const currentPath = window.location.pathname; // Получаем текущий путь страницы
+
+    // Если текущий путь не равен '/', сбрасываем выбранные фильтры
+    if (currentPath !== '/') { 
       setSelectedColor('all');
       setSelectedType('all');
+      setSelectedPrice('default');
     }
 
-    const filteredItems = originslItems.filter(item => {
+    const sortedItems = [...originslItems]; // Создаем копию исходных товаров
 
+    // Если выбрана сортировка по цене в порядке убывания, сортируем товары по убыванию цены
+    if (selectedPrice === 'priceUp') {
+      sortedItems.sort((a, b) => b.price - a.price);
+    }
+
+    // Если выбрана сортировка по цене в порядке возрастания, сортируем товары по возрастанию цены
+    if (selectedPrice === 'priceDown') {
+      sortedItems.sort((a, b) => a.price - b.price);
+    }
+
+    // Фильтруем товары на основе выбранных параметров цвета и типа
+    const filteredItems = sortedItems.filter(item => {
       const isColorMatch = selectedColor === 'all' || item.color === selectedColor;
       const isTypeMatch = selectedType === 'all' || item.type === selectedType;
 
       return isColorMatch && isTypeMatch;
     });
 
+    // Устанавливаем отфильтрованные товары в состояние компонента
     setItems(filteredItems);
-  }, [selectedColor, selectedType, originslItems]);
+  }, [selectedColor, selectedType, selectedPrice, originslItems]);
+
 
   // Обновление количества товара в корзине
   const updateQuantity = (itemId, newQuantity) => {
@@ -97,6 +115,26 @@ function App() {
     setPopups(prevPopups => prevPopups.filter((_, i) => i !== index));
   };
 
+  function filterPriceDown() {
+
+    const sortedItems = [...items]; // Создаем копию массива items
+    sortedItems.sort(function (a, b) {
+      return b.price - a.price;
+    });
+
+    setItems(sortedItems); // Обновляем items с отсортированным массивом
+  } function filterPriceUp() {
+
+    const sortedItems = [...items]; // Создаем копию массива items
+    sortedItems.sort(function (a, b) {
+      return a.price - b.price;
+    });
+
+    setItems(sortedItems); // Обновляем items с отсортированным массивом
+  }
+
+
+
   return (
     <div className="wrapper">
       {popups.map((popup, index) => (
@@ -114,6 +152,7 @@ function App() {
           onRemove={removeFromOrder}
           orders={orders}
         />
+
         <Routes>
           <Route path='/product/:id'
             element={
@@ -126,6 +165,7 @@ function App() {
           <Route path='/'
             element={
               <Main
+                priceFilter={setSelectedPrice}
                 typeCategory={setSelectedType}
                 colorCategory={setSelectedColor}
                 items={items}

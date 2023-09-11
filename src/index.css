@@ -48,3 +48,9 @@ body {
     margin: 100px auto 30px;
     max-width: 90vw;
 }
+
+@media screen and (max-width: 656px){
+    .main-container{margin: 50px auto 30px;
+
+    }
+}

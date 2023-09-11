@@ -8,13 +8,15 @@
     padding: 10px;
 }
 
-.header {    position: fixed;
+.header {
+    position: fixed;
     width: 100%;
     padding: 20px 0;
     top: 0;
     left: 0;
     background-color: #fff;
-    z-index: 10000;    border-bottom: 1px solid var(--main-color);
+    z-index: 10000;
+    border-bottom: 1px solid var(--main-color);
 }
 
 .empty {
@@ -40,21 +42,6 @@
     max-width: 90vw;
     width: 900px;
 }
-
-/* .fixedTopBlock {
-    width: 100%;
-    padding: 20px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #fff;
-    z-index: 100000;
-    transition: 0.8s;
-} */
 
 .cartIcon {
     color: #222;
@@ -248,9 +235,13 @@
 
     .burgerMenuNavigation {
         display: block;
-    }.header{
+    }
+
+    .header {
         padding: 10px 0;
-    }.logo{
+    }
+
+    .logo {
         font-size: 23px;
     }
 }
