@@ -1,6 +1,9 @@
-.wrapper{
-    margin: 0 40px;
-}
-.p{
+.container { 
+     max-width: 800px; 
+     margin: 0 auto; 
+     padding: 20px; 
+     background-color: white; 
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+ }.p{
     margin-bottom: 20px;
 }
