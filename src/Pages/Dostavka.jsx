@@ -8,7 +8,7 @@ export default function Dostavka() {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.container}>
       <p className={styles.p}>Наш інтернет-магазин MONIKA LINGERIE надсилає покупки по всій території України.</p>
       <p className={styles.p}>
         Ми доставляємо замовлення кур’єрськими службами ТОВ «Нова пошта». Уважно перевіряйте ваше замовлення на цілісність і кількість одиниць товару на пошті.
