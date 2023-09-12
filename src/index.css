@@ -50,11 +50,35 @@ body {
 }
 
 
-li{
+li {
     margin-left: 20px;
 }
-@media screen and (max-width: 656px){
-    .main-container{margin: 70px auto 30px;
+
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination li {
+    padding: 5px 7px;
+    cursor: pointer;
+}
+
+.active {
+    border-radius: 5px;
+    border: 1px solid;
+    font-weight: 600;
+}
+
+.disabled a {
+    cursor: not-allowed;
+    color: #c1c1c1;
+}
+
+@media screen and (max-width: 656px) {
+    .main-container {
+        margin: 70px auto 30px;
 
     }
 }
