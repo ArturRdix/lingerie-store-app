@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsTrashFill } from 'react-icons/bs';
 import styles from './OrderItem.module.css'
 
 export default function OrderItem({ item, onRemove, onUpdateQuantity }) {
     const [inputQuantity, setInputQuantity] = useState(item.quantity);
+
+    //useEffect для отслеживания изменений item.quantity
+    useEffect(() => {
+        setInputQuantity(item.quantity);
+    }, [item.quantity]);
 
     const handleQuantityChange = (event) => {
         let newQuantity = parseInt(event.target.value, 10);
@@ -17,10 +22,9 @@ export default function OrderItem({ item, onRemove, onUpdateQuantity }) {
         setInputQuantity(newQuantity);
         onUpdateQuantity(item.id, newQuantity);
     };
-
     return (
         <div className={styles.itemOrder}>
-            <img className={styles.itemImg} src={"/product-images/" + item.img[0]} />
+            <img className={styles.itemImg} src={item.img[0]} />
             <div className={styles.rightBlock}>
                 <h2 className={styles.itemTitle}>{item.title}</h2>
                 <div className={styles.addDetalis}>

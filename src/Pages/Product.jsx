@@ -68,7 +68,7 @@ export default function Product({ item, onAdd }) {
                 <label htmlFor="forColor">Тип лифчика</label>
               </td>
               <td className={styles.value}>
-                <select className={styles.select} name="attributeColor" id="forColor">
+                <select  onChange={(e) => { console.log(e.target.value) }} className={styles.select} name="attributeColor" id="forColor">
                   <option value>Выберите опцию</option>
                   {selectedItem.option && selectedItem.option.typeTop.map((el) => (
                     <option key={el.value} value={el.value}>
@@ -83,7 +83,7 @@ export default function Product({ item, onAdd }) {
                 <label htmlFor="forSizeTop">Размер верха</label>
               </td>
               <td className={styles.value}>
-                <select className={styles.select} name="attributeSizeTop" id="forSizeTop">
+                <select  onChange={(e) => { console.log(e.target.value) }} className={styles.select} name="attributeSizeTop" id="forSizeTop">
                   <option value>Выберите опцию</option>
                   {selectedItem.option && selectedItem.option.sizeTop.map((el) => (
                     <option key={el.value} value={el.value}>
@@ -98,7 +98,7 @@ export default function Product({ item, onAdd }) {
                 <label htmlFor="forUnderpants">Тип трусов</label>
               </td>
               <td className={styles.value}>
-                <select className={styles.select} name="attributeUnderpants" id="forUnderpants">
+                <select  onChange={(e) => { console.log(e.target.value) }} className={styles.select} name="attributeUnderpants" id="forUnderpants">
                   <option value>Выберите опцию</option>
                   {selectedItem.option && selectedItem.option.typeBottom.map((el) => (
                     <option key={el.value} value={el.value}>
@@ -163,7 +163,6 @@ export default function Product({ item, onAdd }) {
           </tbody>
         </table>
         <button onClick={() => {
-          console.log(selectedItem);
           onAdd(selectedItem, addTotalSum)
         }} className={styles.addCartButton}> Добавить в корзину</button>
       </div>

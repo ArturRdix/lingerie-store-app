@@ -84,7 +84,6 @@ function App() {
 
   // Добавление товара в корзину
   const addToOrder = (item, addSum) => {
-    console.log(item);
     const existingOrderItem = orders.find(orderItem => orderItem.id === item.id);
 
     if (existingOrderItem) {
@@ -114,26 +113,6 @@ function App() {
   const closePopup = (index) => {
     setPopups(prevPopups => prevPopups.filter((_, i) => i !== index));
   };
-
-  function filterPriceDown() {
-
-    const sortedItems = [...items]; // Создаем копию массива items
-    sortedItems.sort(function (a, b) {
-      return b.price - a.price;
-    });
-
-    setItems(sortedItems); // Обновляем items с отсортированным массивом
-  } function filterPriceUp() {
-
-    const sortedItems = [...items]; // Создаем копию массива items
-    sortedItems.sort(function (a, b) {
-      return a.price - b.price;
-    });
-
-    setItems(sortedItems); // Обновляем items с отсортированным массивом
-  }
-
-
 
   return (
     <div className="wrapper">

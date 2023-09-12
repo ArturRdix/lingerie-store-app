@@ -30,11 +30,11 @@
     text-align: center;
 }
 
-.rightBlock {
-    display: flex;
+.rightBlock {    display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding-left: 7px;
+    align-items: flex-start;
 }
 
 .itemTitle {
