@@ -62,7 +62,6 @@
     flex-direction: column;
 
 }
-
 .submitButton {
     padding: 10px;
     border: 0;
@@ -71,6 +70,7 @@
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
+    width: 100%;
 }
 .submitButton:hover{
     background: #343434;

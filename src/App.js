@@ -8,6 +8,7 @@ import Main from './Pages/Main';
 import Product from './Pages/Product';
 import Contact from './Pages/Contact';
 import ProNas from './Pages/ProNas';
+import Checkout from './Pages/Checkout';
 
 function App() {
   // Инициализация переменных состояния
@@ -51,12 +52,12 @@ function App() {
     const sortedItems = [...originslItems]; // Создаем копию исходных товаров
 
     // Если выбрана сортировка по цене в порядке убывания, сортируем товары по убыванию цены
-    if (selectedPrice === 'priceUp') {
+    if (selectedPrice === 'priceDown') {
       sortedItems.sort((a, b) => b.price - a.price);
     }
 
     // Если выбрана сортировка по цене в порядке возрастания, сортируем товары по возрастанию цены
-    if (selectedPrice === 'priceDown') {
+    if (selectedPrice === 'priceUp') {
       sortedItems.sort((a, b) => a.price - b.price);
     }
 
@@ -151,6 +152,7 @@ function App() {
               />
             }
           />
+          <Route path='/checkout' element={<Checkout orderItems={orders}/>}/>
           <Route path='/contact' element={<Contact />} />
           <Route path='/pro-nas' element={<ProNas />} />
           <Route path='/dostavka' element={<Dostavka />} />

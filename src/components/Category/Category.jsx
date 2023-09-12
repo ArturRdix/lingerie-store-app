@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import styles from './Category.module.css'
 
-export default function Category({priceFilter, colorCategory, typeCategory }) {
+export default function Category({ priceFilter, colorCategory, typeCategory }) {
     const [colors, setColors] = useState([
         {
             key: 'all',
@@ -27,6 +27,10 @@ export default function Category({priceFilter, colorCategory, typeCategory }) {
         {
             key: 'pink',
             name: 'Розовый'
+        },
+        {
+            key: 'lavanda',
+            name: 'Лавандовый'
         }
     ])
     const [types, setTypes] = useState([
@@ -47,7 +51,7 @@ export default function Category({priceFilter, colorCategory, typeCategory }) {
             name: 'Лифчики'
         }
     ])
-    const[price,setPrice]=useState([
+    const [price, setPrice] = useState([
         {
             key: 'default',
             name: 'По-умолчанию'

@@ -1,6 +1,7 @@
 import React from 'react';
 import OrderItem from '../OrderItem/OrderItem';
 import styles from './CartModal.module.css';
+import { Link } from 'react-router-dom';
 
 export default function CartModal({ orders, onRemove, onUpdateQuantity, onClose, isOpen, totalPrice }) {
 
@@ -30,7 +31,8 @@ export default function CartModal({ orders, onRemove, onUpdateQuantity, onClose,
                 {orders.length > 0 && (
                     <div className={styles.submitOrderBlock}>
                         <b className={styles.totalPriceText}>Сумма: {totalPrice} грн.</b>
-                        <button className={styles.submitButton}>Оформить заказ</button>
+                        <Link to='/checkout'><button className={styles.submitButton} onClick={() => onClose()}>Оформить заказ</button></Link>
+
                     </div>
                 )}
             </div>

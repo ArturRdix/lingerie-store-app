@@ -1,0 +1,64 @@
+.orderForm {}
+
+.formBlock {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.formItems {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+input[name='firstName'],
+input[name='lastName'] {
+    flex-grow: 1;
+}
+
+input[name='city'],
+input[name='region'] {
+    flex-grow: 3;
+}
+
+input[name='postOffice'] {
+    flex-grow: 1;
+}
+
+input[type="tel"],
+input[type='email'] {
+    flex-grow: 1;
+}
+
+textarea[name="comment"] {
+    width: 100%;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type='email'],
+textarea[name="comment"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submitButton {
+    background-color: var(--main-color);
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

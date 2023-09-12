@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Contact.css';
 
-export default function Contact() {
+export default function Contact({orderItems}) {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const handlePhoneNumberChange = (e) => {
@@ -39,7 +39,7 @@ export default function Contact() {
           <input placeholder='Тема запроса' type="text" id="typeRequest" name="typeRequest" required />
           <input
             type="tel"
-            placeholder="Номер тел. (0xx) xxx xx xx"
+            placeholder="Номер тел."
             value={phoneNumber}
             onChange={handlePhoneNumberChange}
             maxLength='15'
