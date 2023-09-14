@@ -34,7 +34,7 @@ export default function Main({ priceFilter, typeCategory, colorCategory, onAdd, 
       <Category priceFilter={priceFilter} typeCategory={typeCategory} colorCategory={colorCategory} />
       <ProductList onAdd={onAdd} items={currentPageItems} />
 
-     {/* <ReactPaginate
+     <ReactPaginate
         className='pagination'
         pageCount={Math.ceil(items.length / itemsPerPage)}
         pageRangeDisplayed={2} // Устанавливаем значение 2 для отображения только текущей и соседних страниц
@@ -46,7 +46,7 @@ export default function Main({ priceFilter, typeCategory, colorCategory, onAdd, 
         breakLabel="..."
         previousLabel="< Перед."
         nextLabel="След. >"
-      />*/}
+      />
 
     </div>
   );
