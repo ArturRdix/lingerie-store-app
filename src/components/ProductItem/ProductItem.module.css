@@ -8,14 +8,11 @@
     cursor: pointer;
     transition: .3s;
 }
-@media screen and (max-width: 656px) {
-   .item{
-    width: 45%;
-   }
-}
-.item:active{
+
+.item:active {
     scale: 0.9;
 }
+
 .itemImg {
     width: 100%;
     transition: 0.3s;
@@ -61,7 +58,7 @@
     z-index: 100;
 }
 
- .addCart:active {
+.addCart:active {
     scale: 0.9;
 }
 
@@ -84,4 +81,19 @@
 .item:hover .itemImg {
     cursor: pointer;
     scale: 1.3;
+}
+
+@media screen and (max-width: 656px) {
+    .itemTitle {
+        font-size:14px;
+    }
+
+    .itemPrice {
+        font-weight: 100;
+        font-size: 14px;
+    }
+
+    .item {
+        width: 45%;
+    }
 }

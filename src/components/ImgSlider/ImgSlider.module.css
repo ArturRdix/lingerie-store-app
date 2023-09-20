@@ -3,11 +3,7 @@
     overflow: hidden;
     position: relative;
 }
-@media screen and (max-width: 656px) {
-    .sliderContainer {
-        width: auto;
-    }
-}
+
 .slider {
     display: flex;
     transition: transform 0.3s ease-in-out;
@@ -34,11 +30,12 @@
     cursor: pointer;
     color: #00000030;
     transition: .3s;
-    transform-origin:center ;
+    transform-origin: center;
 }
-        .sliderContainer:hover .buttonSlide{
-            color: #000000cb;
-        }
+
+.sliderContainer:hover .buttonSlide {
+    color: #000000cb;
+}
 
 .right {
     left: 0;
@@ -46,4 +43,10 @@
 
 .left {
     right: 0;
+}
+
+@media screen and (max-width: 656px) {
+    .sliderContainer {
+        width: auto;
+    }
 }

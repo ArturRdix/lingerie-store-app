@@ -4,6 +4,7 @@ header {
     text-align: center;
     padding: 20px;
 }
+
 .container {
     max-width: 800px;
     margin: 0 auto;
@@ -11,26 +12,32 @@ header {
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .contact-info {
     margin-bottom: 20px;
 }
+
 .contact-info h2 {
     font-size: 24px;
 }
+
 .contact-info p {
     font-size: 18px;
 }
+
 .contact-form {
     margin-top: 20px;
 }
 
 .contact-form input[type="email"],
-.contact-form input[type="tel"]{
+.contact-form input[type="tel"] {
     width: 45%;
 }
-.contact-form input[type="email"]{
-margin-left: 10%;
+
+.contact-form input[type="email"] {
+    margin-left: 10%;
 }
+
 .contact-form input,
 .contact-form textarea {
     width: 100%;
@@ -39,15 +46,16 @@ margin-left: 10%;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    outline: none; 
+    outline: none;
     transition: border-color 0.5s ease, box-shadow 0.5s ease;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-    border-color: #222; 
+    border-color: #222;
     box-shadow: 0 0 5px rgba(42, 41, 42, 0.5);
 }
+
 .contact-form button {
     background-color: #222;
     color: white;

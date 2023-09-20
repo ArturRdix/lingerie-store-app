@@ -19,16 +19,6 @@ footer {
     transition: 0.3s;
 }
 
-@media screen and (max-width: 656px) {
-    .footerNavigation {
-        gap: 20px;
-    }
-
-    .itemNavigation {
-        font-size: 15px;
-    }
-}
-
 .itemNavigation:hover {
     scale: 1.1;
 }
@@ -45,4 +35,14 @@ footer {
 
 .bottomBlock {
     color: #fff;
+}
+
+@media screen and (max-width: 656px) {
+    .footerNavigation {
+        gap: 20px;
+    }
+
+    .itemNavigation {
+        font-size: 15px;
+    }
 }

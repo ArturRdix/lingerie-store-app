@@ -12,7 +12,7 @@ export default function ProductItem({ item}) {
                 </div>
                 <h2 className={styles.itemTitle}>{item.title}</h2>
                 <div className={styles.bottomBlock}>
-                    <b className={styles.itemPrice}>{item.price}₴</b>
+                    <b className={styles.itemPrice}>{item.price},00 грн.</b>
                 </div>
             </Link>
         </div>

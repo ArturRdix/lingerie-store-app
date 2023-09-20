@@ -24,6 +24,7 @@ export default function Contact({orderItems}) {
     setPhoneNumber(formattedNumber);
   };
 
+
   return (
     <div className="container">
       <div className="contact-info">
