@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Popup from './components/Popup/Popup';
@@ -18,7 +18,7 @@ function App() {
   const [popups, setPopups] = useState([]); // Всплывающие сообщения
   const [selectedColor, setSelectedColor] = useState('all'); // Выбранный цвет товара
   const [selectedType, setSelectedType] = useState('all'); // Выбранный тип товара
-  const [selectedPrice, setSelectedPrice] = useState('default')
+  const [selectedPrice, setSelectedPrice] = useState('default') // Выбранный тип сортировки по цене
 
   // Загрузка данных с сервера при загрузке компонента
   useEffect(() => {
@@ -27,11 +27,25 @@ function App() {
         const response = await fetch('http://localhost:3030/api/products');
         const data = await response.json();
         setOriginslItems(data.data);
-      } catch (error) {
+      }
+      catch (error) {
         console.error(error);
       }
     })();
   }, []);
+
+  // Загрузка заказов из localStorage при монтировании компонента
+  useEffect(() => {
+    const storeOrders = localStorage.getItem('orders');
+    if (storeOrders) {
+      setOrders(JSON.parse(storeOrders));
+    }
+  }, []);
+
+  // Сохранение заказов в localStorage при каждом изменении состояния orders
+  useEffect(() => {
+    localStorage.setItem('orders', JSON.stringify(orders));
+  }, [orders]);
 
   // Обновление списка товаров при изменении исходных товаров
   useEffect(() => {
@@ -43,7 +57,7 @@ function App() {
     const currentPath = window.location.pathname; // Получаем текущий путь страницы
 
     // Если текущий путь не равен '/', сбрасываем выбранные фильтры
-    if (currentPath !== '/') { 
+    if (currentPath !== '/') {
       setSelectedColor('all');
       setSelectedType('all');
       setSelectedPrice('default');
@@ -152,7 +166,7 @@ function App() {
               />
             }
           />
-          <Route path='/checkout' element={<Checkout orderItems={orders}/>}/>
+          <Route path='/checkout' element={<Checkout orderItems={orders} />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/pro-nas' element={<ProNas />} />
           <Route path='/dostavka' element={<Dostavka />} />
