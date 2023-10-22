@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Category from '../components/Category/Category';
 import ProductList from '../components/ProductList';
 import ReactPaginate from 'react-paginate';
+import originsItemsStore from '../store/originsItemsStore';
 
-export default function Main({ priceFilter, typeCategory, colorCategory, onAdd, items }) {
+export default function Main() {
   const [currentPage, setCurrentPage] = useState(0); // Текущая страница
   const [itemsPerPage, setItemsPerPage] = useState(12); // Количество товаров на странице
 
@@ -15,14 +16,12 @@ export default function Main({ priceFilter, typeCategory, colorCategory, onAdd, 
 
   // useEffect для сброса фильтров при монтировании компонента
   useEffect(() => {
-    typeCategory('all'); // Сброс типа товара
-    colorCategory('all'); // Сброс цвета товара
     setCurrentPage(0); // Сброс текущей страницы
   }, []);
 
   // Разделение списка товаров на страницы
   const offset = currentPage * itemsPerPage;
-  const currentPageItems = items.slice(offset, offset + itemsPerPage);
+  const currentPageItems = originsItemsStore.items.slice(offset, offset + itemsPerPage);
 
   // Обработчик изменения страницы
   const handlePageChange = ({ selected }) => {
@@ -31,12 +30,12 @@ export default function Main({ priceFilter, typeCategory, colorCategory, onAdd, 
 
   return (
     <div className="wrapper">
-      <Category priceFilter={priceFilter} typeCategory={typeCategory} colorCategory={colorCategory} />
-      <ProductList onAdd={onAdd} items={currentPageItems} />
+      <Category/>
+      <ProductList items={currentPageItems} />
 
      <ReactPaginate
         className='pagination'
-        pageCount={Math.ceil(items.length / itemsPerPage)}
+        pageCount={Math.ceil(originsItemsStore.items.length / itemsPerPage)}
         pageRangeDisplayed={2} // Устанавливаем значение 2 для отображения только текущей и соседних страниц
         marginPagesDisplayed={2} // Устанавливаем значение 2 для отображения только двух страницы слева и справа от текущей
         onPageChange={handlePageChange}

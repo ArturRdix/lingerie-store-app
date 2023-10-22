@@ -1,8 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
 import styles from './Category.module.css'
+import filterItemsStore from '../../store/filterItemsStore'
 
-export default function Category({ priceFilter, colorCategory, typeCategory }) {
+export default function Category() {
     const [colors, setColors] = useState([
         {
             key: 'all',
@@ -66,17 +67,29 @@ export default function Category({ priceFilter, colorCategory, typeCategory }) {
         }
     ])
 
+    const handleColorChange = (event) => {
+        filterItemsStore.selectedColor = event.target.value;
+        filterItemsStore.filter();
+    };
+
+    const handleTypeChange = (event) => {
+        filterItemsStore.selectedType = event.target.value;
+        filterItemsStore.filter();
+    };
+
+    const handlePriceChange = (event) => {
+        filterItemsStore.selectedPrice = event.target.value;
+        filterItemsStore.filter();
+    };
+
     return (
         <div className={styles.categorys}>
-
             <div className={styles.selectBlock}>
-                <label htmlFor="types">Цена: </label>
-                <select className={styles} onChange={(el) => priceFilter(el.target.value)} name="" id="types">
-                    {price.map(el => (
-                        <option
-                            value={el.key}
-                            key={el.key}
-                        >{el.name}
+                <label htmlFor="price">Цена: </label>
+                <select className={styles.select} onChange={handlePriceChange} id="price">
+                    {price.map((el) => (
+                        <option value={el.key} key={el.key}>
+                            {el.name}
                         </option>
                     ))}
                 </select>
@@ -84,13 +97,10 @@ export default function Category({ priceFilter, colorCategory, typeCategory }) {
 
             <div className={styles.selectBlock}>
                 <label htmlFor="colors">Цвет: </label>
-                <select className={styles} onChange={(el) => colorCategory(el.target.value)} name="" id="colors">
-                    {colors.map(el => (
-                        <option
-                            className={styles}
-                            value={el.key}
-                            key={el.key}
-                        >{el.name}
+                <select className={styles.select} onChange={handleColorChange} id="colors">
+                    {colors.map((el) => (
+                        <option value={el.key} key={el.key}>
+                            {el.name}
                         </option>
                     ))}
                 </select>
@@ -98,16 +108,14 @@ export default function Category({ priceFilter, colorCategory, typeCategory }) {
 
             <div className={styles.selectBlock}>
                 <label htmlFor="types">Тип белья: </label>
-                <select className={styles} onChange={(el) => typeCategory(el.target.value)} name="" id="types">
-                    {types.map(el => (
-                        <option
-                            value={el.key}
-                            key={el.key}
-                        >{el.name}
+                <select className={styles.select} onChange={handleTypeChange} id="types">
+                    {types.map((el) => (
+                        <option value={el.key} key={el.key}>
+                            {el.name}
                         </option>
                     ))}
                 </select>
             </div>
         </div>
-    )
+    );
 }

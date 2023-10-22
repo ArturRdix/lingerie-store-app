@@ -2,8 +2,9 @@ import React from 'react';
 import OrderItem from '../OrderItem/OrderItem';
 import styles from './CartModal.module.css';
 import { Link } from 'react-router-dom';
+import ordersStore from '../../store/ordersStore';
 
-export default function CartModal({ orders, onRemove, onUpdateQuantity, onClose, isOpen, totalPrice }) {
+export default function CartModal({onClose, isOpen, totalPrice }) {
 
     function handleModalClick(event) {
         event.stopPropagation();
@@ -17,18 +18,16 @@ export default function CartModal({ orders, onRemove, onUpdateQuantity, onClose,
                     <h2 className={styles.cartTitle}>Корзина</h2>
                 </div>
                 <div className={styles.cartItems}>
-                    {orders.length > 0 ? (
-                        orders.map(element => (
+                    {ordersStore.orders.length > 0 ? (
+                        ordersStore.orders.map(element => (
                             <OrderItem
                                 key={element.id}
                                 item={element}
-                                onRemove={onRemove}
-                                onUpdateQuantity={onUpdateQuantity}
                             />
                         ))) : (<h3 className={styles.empty}>Ваша корзина пуста</h3>)}
                 </div>
 
-                {orders.length > 0 && (
+                {ordersStore.orders.length > 0 && (
                     <div className={styles.submitOrderBlock}>
                         <b className={styles.totalPriceText}>Сумма: {totalPrice} грн.</b>
                         <Link to='/checkout'><button className={styles.submitButton} onClick={() => onClose()}>Оформить заказ</button></Link>

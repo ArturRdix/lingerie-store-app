@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import styles from './Checkout.module.css'
 import { Link } from 'react-router-dom';
+import ordersStore from '../store/ordersStore';
 
-export default function Checkout({ orderItems }) {
+export default function Checkout() {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -50,7 +51,7 @@ export default function Checkout({ orderItems }) {
   return (
     <>
       <h1>Оформление заказа</h1>
-      {orderItems.length === 0 ? (
+      {ordersStore.orders.length === 0 ? (
         <p>Ваша корзина пуста. <Link to="/">Вернуться к покупкам</Link></p>
       ) : (<div className={styles.orderForm}>
         <form className={styles.formBlock} onSubmit={handleSubmit}>

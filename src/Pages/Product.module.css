@@ -45,6 +45,11 @@
     cursor: pointer;
 }
 
+.addCartButton:disabled {
+    cursor: no-drop;
+    background: #888888 !important;
+}
+
 .addCartButton:hover {
     background: #343434;
 }
@@ -56,4 +61,8 @@
 
 span {
     font-size: 12px;
+}
+.warningText{
+    color: #ca0000;
+    transition: 5s;
 }

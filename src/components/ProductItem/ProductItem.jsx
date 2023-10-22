@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './ProductItem.module.css'
 
-export default function ProductItem({ item}) {
+export default function ProductItem({item}) {
     return (
         <div className={styles.item}>
             <Link to={`/product/${item.id}`}>

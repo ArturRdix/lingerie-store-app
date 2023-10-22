@@ -2,16 +2,35 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styles from './Product.module.css'
 import ImgSlider from '../components/ImgSlider/ImgSlider';
+import originsItemsStore from '../store/originsItemsStore';
+import ordersStore from '../store/ordersStore';
 
-export default function Product({ item, onAdd }) {
+export default function Product() {
   const { id } = useParams()
-  const selectedItem = item.find(item => item.id === Number(id));
+  const selectedItem = originsItemsStore.items.find(item => item.id === Number(id));
   const [garter, setGarter] = useState(false)
   const [poyas, setPoyas] = useState(false)
   const [box, setBox] = useState(false)
   const [addTotalSum, setAddTotalSum] = useState(0);
+  const [selectedOptions, setSelectedOptions] = useState({
+    typeTop: 'false',
+    sizeTop: 'false',
+    typeBottom: 'false',
+    sizeBottom: 'false',
+  });
+  const [disable, setDisable] = useState(true);
 
-
+  useEffect(() => {
+    if (selectedOptions.typeTop !== 'false' &&
+      selectedOptions.sizeTop !== 'false' &&
+      selectedOptions.typeBottom !== 'false' &&
+      selectedOptions.sizeBottom !== 'false') {
+      setDisable(false)
+    }
+    else{
+      setDisable(true)
+    }
+  }, [selectedOptions]);
 
   if (!selectedItem) {
     return <div>Товар не найден</div>;
@@ -68,8 +87,13 @@ export default function Product({ item, onAdd }) {
                 <label htmlFor="forColor">Тип лифчика</label>
               </td>
               <td className={styles.value}>
-                <select  onChange={(e) => { console.log(e.target.value) }} className={styles.select} name="attributeColor" id="forColor">
-                  <option value>Выберите опцию</option>
+                <select onChange={(e) => {
+                  setSelectedOptions({
+                    ...selectedOptions,
+                    typeTop: e.target.value
+                  })
+                }} className={styles.select} name="attributeColor" id="forColor">
+                  <option value='false'>Выберите опцию</option>
                   {selectedItem.option && selectedItem.option.typeTop.map((el) => (
                     <option key={el.value} value={el.value}>
                       {el.label}
@@ -83,8 +107,13 @@ export default function Product({ item, onAdd }) {
                 <label htmlFor="forSizeTop">Размер верха</label>
               </td>
               <td className={styles.value}>
-                <select  onChange={(e) => { console.log(e.target.value) }} className={styles.select} name="attributeSizeTop" id="forSizeTop">
-                  <option value>Выберите опцию</option>
+                <select onChange={(e) => {
+                  setSelectedOptions({
+                    ...selectedOptions,
+                    sizeTop: e.target.value
+                  })
+                }} className={styles.select} name="attributeSizeTop" id="forSizeTop">
+                  <option value='false'>Выберите опцию</option>
                   {selectedItem.option && selectedItem.option.sizeTop.map((el) => (
                     <option key={el.value} value={el.value}>
                       {el.label}
@@ -98,8 +127,13 @@ export default function Product({ item, onAdd }) {
                 <label htmlFor="forUnderpants">Тип трусов</label>
               </td>
               <td className={styles.value}>
-                <select  onChange={(e) => { console.log(e.target.value) }} className={styles.select} name="attributeUnderpants" id="forUnderpants">
-                  <option value>Выберите опцию</option>
+                <select onChange={(e) => {
+                  setSelectedOptions({
+                    ...selectedOptions,
+                    typeBottom: e.target.value
+                  })
+                }} className={styles.select} name="attributeUnderpants" id="forUnderpants">
+                  <option value='false'>Выберите опцию</option>
                   {selectedItem.option && selectedItem.option.typeBottom.map((el) => (
                     <option key={el.value} value={el.value}>
                       {el.label}
@@ -113,8 +147,13 @@ export default function Product({ item, onAdd }) {
                 <label htmlFor="forSizeBottom">Размер низа</label>
               </td>
               <td className={styles.value}>
-                <select onChange={(e) => { console.log(e.target.value) }} className={styles.select} name="attributeSizeBottom" id="forSizeBottom">
-                  <option value=''>Выберите опцию</option>
+                <select onChange={(e) => {
+                  setSelectedOptions({
+                    ...selectedOptions,
+                    sizeBottom: e.target.value
+                  })
+                }} className={styles.select} name="attributeSizeBottom" id="forSizeBottom">
+                  <option value='false'>Выберите опцию</option>
                   {selectedItem.option && selectedItem.option.sizeBottom.map((el) => (
                     <option key={el.value} value={el.value}>
                       {el.label}
@@ -162,9 +201,15 @@ export default function Product({ item, onAdd }) {
             </tr>
           </tbody>
         </table>
-        <button onClick={() => {
-          onAdd(selectedItem, addTotalSum)
-        }} className={styles.addCartButton}> Добавить в корзину</button>
+        <button
+          onClick={() => {
+            ordersStore.addToOrder(selectedItem, addTotalSum)
+          }} className={styles.addCartButton}
+          disabled={disable}
+        > Добавить в корзину</button>
+        {disable&&
+        <h3 className={styles.warningText}>Выберите пожалуйста опции к заказу</h3>
+        }
       </div>
     </div>
   )

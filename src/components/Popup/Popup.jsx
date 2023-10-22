@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './Popup.css';
+import popupStore from '../../store/popupStore';
 
-const Popup = ({ message, onPopupClose, index }) => {
+const Popup = ({ message, index }) => {
     const [visible, setVisible] = useState(true);
 
     useEffect(() => {
         const timer = setTimeout(() => {
             setVisible(false);
-            onPopupClose(index);
+            popupStore.closePopup(index);
         }, 3000);
 
         return () => {
             clearTimeout(timer);
         };
-    }, [onPopupClose, index]);
+    }, [ index]);
 
     const popupClassName = `popup ${visible ? '' : 'hidden'}`;
 

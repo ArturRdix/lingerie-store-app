@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { BsTrashFill } from 'react-icons/bs';
 import styles from './OrderItem.module.css'
+import ordersStore from '../../store/ordersStore';
 
-export default function OrderItem({ item, onRemove, onUpdateQuantity }) {
+export default function OrderItem({ item}) {
     const [inputQuantity, setInputQuantity] = useState(item.quantity);
 
     //useEffect для отслеживания изменений item.quantity
@@ -20,7 +21,7 @@ export default function OrderItem({ item, onRemove, onUpdateQuantity }) {
         }
 
         setInputQuantity(newQuantity);
-        onUpdateQuantity(item.id, newQuantity);
+        ordersStore.updateQuantity(item.id, newQuantity);
     };
     return (
         <div className={styles.itemOrder}>
@@ -43,7 +44,7 @@ export default function OrderItem({ item, onRemove, onUpdateQuantity }) {
                             if (inputQuantity > 1) {
                                 const newQuantity = inputQuantity - 1;
                                 setInputQuantity(newQuantity);
-                                onUpdateQuantity(item.id, newQuantity);
+                                ordersStore.updateQuantity(item.id, newQuantity);
                             }
                         }}>-</button>
                     <input
@@ -59,7 +60,7 @@ export default function OrderItem({ item, onRemove, onUpdateQuantity }) {
                             if (inputQuantity < 99) {
                                 const newQuantity = inputQuantity + 1;
                                 setInputQuantity(newQuantity);
-                                onUpdateQuantity(item.id, newQuantity);
+                                ordersStore.updateQuantity(item.id, newQuantity);
                             }
                         }}>
                         +
@@ -71,7 +72,7 @@ export default function OrderItem({ item, onRemove, onUpdateQuantity }) {
                 <BsTrashFill
                     onClick={(event) => {
                         event.stopPropagation();
-                        onRemove(item);
+                        ordersStore.removeFromOrder(item);
                     }}
                     className={styles.trashIcon}
                 />
