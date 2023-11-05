@@ -5,9 +5,8 @@ import CartModal from '../CartModule/CartModal';
 import styles from './Header.module.css'
 import ordersStore from '../../store/ordersStore';
 
-export default function Header() {
+const Header = () => {
     const [cartState, setCartState] = useState(false);
-    const [totalPrice, setTotalPrice] = useState(0);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [tmpSotreOrders, setTmpStoreOrders] = useState(ordersStore.orders)
 
@@ -15,19 +14,18 @@ export default function Header() {
         return value.replace('+', '\\+')
     }
 
-    useEffect(() => {
-        let calculatedTotalPrice = 0;
-
-        for (const element of ordersStore.orders) {
-            const price = parseFloat(element.price);
-            const quantity = element.quantity || 1;
-            if (!isNaN(price)) {
-                calculatedTotalPrice += price * quantity;
-            }
-        }
-
-        setTotalPrice(calculatedTotalPrice);
-    }, [tmpSotreOrders]);
+    // useEffect(() => {
+    //     let calculatedTotalPrice = 0;
+    //     console.log('сработало')
+    //     for (const element of tmpSotreOrders) {
+    //         const price = parseFloat(element.price);
+    //         const quantity = element.quantity || 1;
+    //         if (!isNaN(price)) {
+    //             calculatedTotalPrice += price * quantity;
+    //         }
+    //     }
+    //     setTotalPrice(calculatedTotalPrice);
+    // }, [totalPrice]);
 
     useEffect(() => {
         function handleDocumentClick(event) {
@@ -78,9 +76,9 @@ export default function Header() {
             <CartModal
                 isOpen={cartState}
                 onClose={() => setCartState(false)}
-                totalPrice={totalPrice}
             />
             {/* <div className={styles.banner}></div>*/}
         </header>
     );
 }
+export default Header

@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx"
 import popupStore from "./popupStore"
+import ordersQuantityStore from "./ordersQuantityStore"
 
 class OrdersStore {
     orders = []
@@ -26,19 +27,22 @@ class OrdersStore {
 
             this.orders = updatedOrders;
         }
-
         popupStore.addPopups(item)
+        ordersQuantityStore.updateTotalPrice()
     };
     removeFromOrder = (item) => {
-        const updatedOrders = this.orders.filter(orderItem => orderItem.id !== item.id);
+        const updatedOrders = this.orders.filter(orderItem => item.id !== orderItem.id);
         this.orders = updatedOrders;
+        ordersQuantityStore.updateTotalPrice()
     };
+
     updateQuantity = (itemId, newQuantity) => {
         const updatedOrders = this.orders.map(orderItem =>
             orderItem.id === itemId ? { ...orderItem, quantity: newQuantity } : orderItem
         );
 
         this.orders = updatedOrders;
+        ordersQuantityStore.updateTotalPrice()
     };
 }
 export default new OrdersStore

@@ -3,7 +3,7 @@ import { BsTrashFill } from 'react-icons/bs';
 import styles from './OrderItem.module.css'
 import ordersStore from '../../store/ordersStore';
 
-export default function OrderItem({ item}) {
+export default function OrderItem({item}) {
     const [inputQuantity, setInputQuantity] = useState(item.quantity);
 
     //useEffect для отслеживания изменений item.quantity

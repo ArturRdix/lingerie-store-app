@@ -16,7 +16,7 @@ import popupStore from './store/popupStore';
 
 const App = observer(() => {
   // Инициализация переменных состояния
-  let { originItems, items } = originsItemsStore
+  let { originItems } = originsItemsStore
 
   // Загрузка данных с сервера при загрузке компонента
   useEffect(() => {
@@ -61,7 +61,7 @@ const App = observer(() => {
         <Routes>
           <Route path='/product/:id' element={<Product />} />
           <Route path='/' element={<Main />} />
-          <Route path='/checkout' element={<Checkout/>} />
+          <Route path='/checkout' element={<Checkout />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/pro-nas' element={<ProNas />} />
           <Route path='/dostavka' element={<Dostavka />} />

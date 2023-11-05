@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import OrderItem from '../OrderItem/OrderItem';
 import styles from './CartModal.module.css';
 import { Link } from 'react-router-dom';
 import ordersStore from '../../store/ordersStore';
+import ordersQuantityStore from '../../store/ordersQuantityStore';
 
-export default function CartModal({onClose, isOpen, totalPrice }) {
-
+export default function CartModal({ onClose, isOpen }) {
+    // const [totalPrice, setTotalPrice] = useState(ordersQuantityStore.totalPrice)
     function handleModalClick(event) {
         event.stopPropagation();
     }
-
+    // useEffect(() => {
+    //     setTotalPrice(ordersQuantityStore.totalPrice)
+    // }, [totalPrice])
     return (
         <div className={`${styles.cartModal} ${isOpen ? styles.open : ''}`}
             onClick={handleModalClick}>
@@ -29,7 +32,7 @@ export default function CartModal({onClose, isOpen, totalPrice }) {
 
                 {ordersStore.orders.length > 0 && (
                     <div className={styles.submitOrderBlock}>
-                        <b className={styles.totalPriceText}>Сумма: {totalPrice} грн.</b>
+                        <b className={styles.totalPriceText}>Сумма: {ordersQuantityStore.totalPrice} грн.</b>
                         <Link to='/checkout'><button className={styles.submitButton} onClick={() => onClose()}>Оформить заказ</button></Link>
 
                     </div>
