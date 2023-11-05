@@ -6,13 +6,10 @@ import ordersStore from '../../store/ordersStore';
 import ordersQuantityStore from '../../store/ordersQuantityStore';
 
 export default function CartModal({ onClose, isOpen }) {
-    // const [totalPrice, setTotalPrice] = useState(ordersQuantityStore.totalPrice)
+    const [totalPrice, setTotalPrice] = useState(ordersQuantityStore.totalPrice)
     function handleModalClick(event) {
         event.stopPropagation();
     }
-    // useEffect(() => {
-    //     setTotalPrice(ordersQuantityStore.totalPrice)
-    // }, [totalPrice])
     return (
         <div className={`${styles.cartModal} ${isOpen ? styles.open : ''}`}
             onClick={handleModalClick}>
@@ -26,13 +23,14 @@ export default function CartModal({ onClose, isOpen }) {
                             <OrderItem
                                 key={element.id}
                                 item={element}
+                                setTotalPrice={setTotalPrice}
                             />
                         ))) : (<h3 className={styles.empty}>Ваша корзина пуста</h3>)}
                 </div>
 
                 {ordersStore.orders.length > 0 && (
                     <div className={styles.submitOrderBlock}>
-                        <b className={styles.totalPriceText}>Сумма: {ordersQuantityStore.totalPrice} грн.</b>
+                        <b className={styles.totalPriceText}>Сумма: {totalPrice} грн.</b>
                         <Link to='/checkout'><button className={styles.submitButton} onClick={() => onClose()}>Оформить заказ</button></Link>
 
                     </div>

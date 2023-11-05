@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { BsTrashFill } from 'react-icons/bs';
 import styles from './OrderItem.module.css'
 import ordersStore from '../../store/ordersStore';
+import ordersQuantityStore from "../../store/ordersQuantityStore";
 
-export default function OrderItem({item}) {
+export default function OrderItem({item, setTotalPrice}) {
     const [inputQuantity, setInputQuantity] = useState(item.quantity);
 
     //useEffect для отслеживания изменений item.quantity
@@ -22,6 +23,7 @@ export default function OrderItem({item}) {
 
         setInputQuantity(newQuantity);
         ordersStore.updateQuantity(item.id, newQuantity);
+        setTotalPrice(ordersQuantityStore.totalPrice);
     };
     return (
         <div className={styles.itemOrder}>
@@ -45,6 +47,7 @@ export default function OrderItem({item}) {
                                 const newQuantity = inputQuantity - 1;
                                 setInputQuantity(newQuantity);
                                 ordersStore.updateQuantity(item.id, newQuantity);
+                                setTotalPrice(ordersQuantityStore.totalPrice);
                             }
                         }}>-</button>
                     <input
@@ -61,6 +64,7 @@ export default function OrderItem({item}) {
                                 const newQuantity = inputQuantity + 1;
                                 setInputQuantity(newQuantity);
                                 ordersStore.updateQuantity(item.id, newQuantity);
+                                setTotalPrice(ordersQuantityStore.totalPrice);
                             }
                         }}>
                         +
