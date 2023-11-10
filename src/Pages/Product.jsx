@@ -51,6 +51,7 @@ function Product() {
         return <div>Товар не найден</div>;
     }
 
+    selectedItem.mainOptions = selectedOptions;
     selectedItem.options = optionsItem;
 
     const handleChange = (event, option) => {
