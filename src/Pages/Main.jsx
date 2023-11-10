@@ -3,8 +3,9 @@ import Category from '../components/Category/Category';
 import ProductList from '../components/ProductList';
 import ReactPaginate from 'react-paginate';
 import originsItemsStore from '../store/originsItemsStore';
+import {observer} from "mobx-react-lite";
 
-export default function Main() {
+function Main() {
   const [currentPage, setCurrentPage] = useState(0); // Текущая страница
   const [itemsPerPage, setItemsPerPage] = useState(12); // Количество товаров на странице
 
@@ -50,3 +51,5 @@ export default function Main() {
     </div>
   );
 }
+
+export default observer(Main);

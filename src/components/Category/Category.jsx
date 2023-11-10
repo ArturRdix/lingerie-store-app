@@ -69,17 +69,14 @@ export default function Category() {
 
     const handleColorChange = (event) => {
         filterItemsStore.selectedColor = event.target.value;
-        filterItemsStore.filter();
     };
 
     const handleTypeChange = (event) => {
         filterItemsStore.selectedType = event.target.value;
-        filterItemsStore.filter();
     };
 
     const handlePriceChange = (event) => {
         filterItemsStore.selectedPrice = event.target.value;
-        filterItemsStore.filter();
     };
 
     return (

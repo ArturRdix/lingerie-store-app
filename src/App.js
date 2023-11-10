@@ -13,25 +13,13 @@ import { observer } from 'mobx-react-lite';
 import originsItemsStore from './store/originsItemsStore';
 import filterItemsStore from './store/filterItemsStore';
 import popupStore from './store/popupStore';
+import products from "./network/propducts";
 
-const App = observer(() => {
+products.get().then(data => originsItemsStore.setItem(data));
+
+const App = () => {
   // Инициализация переменных состояния
-  let { originItems } = originsItemsStore
-
-  // Загрузка данных с сервера при загрузке компонента
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch('http://localhost:3030/api/products');
-        const data = await response.json();
-        originItems = data.data
-        originsItemsStore.setItem(originItems)
-      }
-      catch (error) {
-        console.error(error);
-      }
-    })();
-  }, []);
+  let { originItems } = originsItemsStore;
 
   useEffect(() => {
     const currentPath = window.location.pathname; // Получаем текущий путь страницы
@@ -43,7 +31,6 @@ const App = observer(() => {
       filterItemsStore.selectedPrice = 'default';
     }
   }, []);
-
 
   return (
     <div className="wrapper">
@@ -71,6 +58,6 @@ const App = observer(() => {
       <Footer />
     </div>
   );
-})
+}
 
-export default App;
+export default observer(App);
