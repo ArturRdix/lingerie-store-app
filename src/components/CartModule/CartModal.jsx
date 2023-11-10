@@ -19,7 +19,7 @@ function CartModal({onClose, isOpen}) {
                     {ordersStore.orders.length > 0 ? (
                         ordersStore.orders.map(element => (
                             <OrderItem
-                                key={element.id}
+                                key={ordersStore.getItemKey(element)}
                                 item={element}
                             />
                         ))) : (<h3 className={styles.empty}>Ваша корзина пуста</h3>)}

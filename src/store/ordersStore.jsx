@@ -12,31 +12,44 @@ class OrdersStore {
         this.orders = order
     };
 
-    addToOrder(item, optionsSum) {
-        const existingOrderItem = this.orders.find(orderItem => orderItem.id === item.id);
+    addToOrder(item) {
+        const existingOrderItem = this.getOrderByItem(item);
 
         if (existingOrderItem) {
             existingOrderItem.quantity++;
         } else {
-            const updatedItem = {...item, optionsSum: optionsSum, quantity: 1};
+            const updatedItem = {...item, quantity: 1};
             this.orders = [...this.orders, updatedItem];
         }
         popupStore.addPopups(item);
     };
 
-    removeFromOrder(item) {
-        this.orders = this.orders.filter(orderItem => item.id !== orderItem.id);
-    };
-
-    updateQuantity(itemId, newQuantity) {
-        let orderItem = this.orders.find(orderItem => orderItem.id === itemId);
+    updateQuantity(item, newQuantity) {
+        let orderItem = this.getOrderByItem(item);
         orderItem.quantity = newQuantity;
     };
+
+    removeFromOrder(item) {
+        let itemKey = this.getItemKey(item);
+        this.orders = this.orders.filter(orderItem => itemKey !== this.getItemKey(orderItem));
+    };
+
+    getOrderByItem(item) {
+        let itemKey = this.getItemKey(item);
+        return this.orders.find(orderItem => itemKey === this.getItemKey(orderItem));
+    }
+
+    getItemKey(item) {
+        return item.id + Object.keys(item.options)
+            //.sort()
+            .reduce((sum, item) => sum + '|' + item, '');
+    }
 
     get totalPrice() {
         let calculatedTotalPrice = 0;
         for (const element of this.orders) {
-            const price = element.price + element.optionsSum;
+            const price = element.price + Object.values(element.options)
+                .reduce((sum, item) => sum + item.price, 0);
             calculatedTotalPrice += price * element.quantity;
         }
         return calculatedTotalPrice;

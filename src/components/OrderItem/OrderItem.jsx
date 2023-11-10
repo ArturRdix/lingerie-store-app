@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { BsTrashFill } from 'react-icons/bs';
+import React, {useEffect, useState} from 'react';
+import {BsTrashFill} from 'react-icons/bs';
 import styles from './OrderItem.module.css'
 import ordersStore from '../../store/ordersStore';
 
 export default function OrderItem({item, setTotalPrice}) {
     const [inputQuantity, setInputQuantity] = useState(item.quantity);
-    const priceItem = item.price + item.optionsSum;
+    const priceItem = item.price + (Object.values(item.options)
+        .reduce((sum, item) => sum + item.price, 0) ?? 0);
 
     //useEffect для отслеживания изменений item.quantity
     useEffect(() => {
@@ -17,22 +18,25 @@ export default function OrderItem({item, setTotalPrice}) {
 
         if (newQuantity <= 0) {
             newQuantity = 1;
-        } if (newQuantity >= 99) {
+        }
+        if (newQuantity >= 99) {
             newQuantity = 99;
         }
 
         setInputQuantity(newQuantity);
-        ordersStore.updateQuantity(item.id, newQuantity);
+        ordersStore.updateQuantity(item, newQuantity);
     };
     return (
         <div className={styles.itemOrder}>
-            <img className={styles.itemImg} src={item.img[0]} />
+            <img className={styles.itemImg} src={item.img[0]}/>
             <div className={styles.rightBlock}>
                 <h2 className={styles.itemTitle}>{item.title}</h2>
                 <div className={styles.addDetalis}>
-                    {item.garter && <span>+Гартер</span>}
-                    {item.poyas && <span>+Пояс</span>}
-                    {item.box && <span>+Упаковка</span>}
+                    {
+                        Object.values(item.options).map(option =>
+                            <span key={option.name}>+{option.title}</span>
+                        )
+                    }
                 </div>
                 <b className={styles.itemPrice}>
                     {inputQuantity > 1
@@ -41,13 +45,14 @@ export default function OrderItem({item, setTotalPrice}) {
                 </b>
                 <div className={styles.quantityControls}>
                     <button className={styles.btnCart}
-                        onClick={() => {
-                            if (inputQuantity > 1) {
-                                const newQuantity = inputQuantity - 1;
-                                setInputQuantity(newQuantity);
-                                ordersStore.updateQuantity(item.id, newQuantity);
-                            }
-                        }}>-</button>
+                            onClick={() => {
+                                if (inputQuantity > 1) {
+                                    const newQuantity = inputQuantity - 1;
+                                    setInputQuantity(newQuantity);
+                                    ordersStore.updateQuantity(item, newQuantity);
+                                }
+                            }}>-
+                    </button>
                     <input
                         className={styles.inputCart}
                         type="number"
@@ -57,13 +62,13 @@ export default function OrderItem({item, setTotalPrice}) {
                         onChange={handleQuantityChange}
                     />
                     <button className={styles.btnCart}
-                        onClick={() => {
-                            if (inputQuantity < 99) {
-                                const newQuantity = inputQuantity + 1;
-                                setInputQuantity(newQuantity);
-                                ordersStore.updateQuantity(item.id, newQuantity);
-                            }
-                        }}>
+                            onClick={() => {
+                                if (inputQuantity < 99) {
+                                    const newQuantity = inputQuantity + 1;
+                                    setInputQuantity(newQuantity);
+                                    ordersStore.updateQuantity(item, newQuantity);
+                                }
+                            }}>
                         +
                     </button>
                 </div>

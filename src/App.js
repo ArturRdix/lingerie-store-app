@@ -32,8 +32,8 @@ const App = () => {
         <Header />
 
         <Routes>
-          <Route path='/product/:id' element={<Product />} />
           <Route path='/' element={<Main />} />
+          <Route path='/product/:id' element={<Product />} />
           <Route path='/checkout' element={<Checkout />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/pro-nas' element={<ProNas />} />
