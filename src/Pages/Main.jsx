@@ -4,10 +4,17 @@ import ProductList from '../components/ProductList';
 import ReactPaginate from 'react-paginate';
 import originsItemsStore from '../store/originsItemsStore';
 import {observer} from "mobx-react-lite";
+import filterItemsStore from "../store/filterItemsStore";
 
 function Main() {
   const [currentPage, setCurrentPage] = useState(0); // Текущая страница
   const [itemsPerPage, setItemsPerPage] = useState(12); // Количество товаров на странице
+
+  useEffect(() => {
+    filterItemsStore.selectedColor = 'all';
+    filterItemsStore.selectedType = 'all';
+    filterItemsStore.selectedPrice = 'default';
+  }, []);
 
   // Прокрутка страницы в начало
   const wrapper = document.querySelector('.wrapper');

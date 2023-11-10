@@ -18,20 +18,6 @@ import products from "./network/propducts";
 products.get().then(data => originsItemsStore.setItem(data));
 
 const App = () => {
-  // Инициализация переменных состояния
-  let { originItems } = originsItemsStore;
-
-  useEffect(() => {
-    const currentPath = window.location.pathname; // Получаем текущий путь страницы
-
-    // Если текущий путь не равен '/', сбрасываем выбранные фильтры
-    if (currentPath !== '/') {
-      filterItemsStore.selectedColor = 'all';
-      filterItemsStore.selectedType = 'all';
-      filterItemsStore.selectedPrice = 'default';
-    }
-  }, []);
-
   return (
     <div className="wrapper">
       {popupStore.popups.map((popup, index) => (
