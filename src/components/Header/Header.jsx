@@ -8,24 +8,10 @@ import ordersStore from '../../store/ordersStore';
 const Header = () => {
     const [cartState, setCartState] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [tmpSotreOrders, setTmpStoreOrders] = useState(ordersStore.orders)
 
     const replacer = (value) => {
         return value.replace('+', '\\+')
     }
-
-    // useEffect(() => {
-    //     let calculatedTotalPrice = 0;
-    //     console.log('сработало')
-    //     for (const element of tmpSotreOrders) {
-    //         const price = parseFloat(element.price);
-    //         const quantity = element.quantity || 1;
-    //         if (!isNaN(price)) {
-    //             calculatedTotalPrice += price * quantity;
-    //         }
-    //     }
-    //     setTotalPrice(calculatedTotalPrice);
-    // }, [totalPrice]);
 
     useEffect(() => {
         function handleDocumentClick(event) {

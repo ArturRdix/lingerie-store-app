@@ -4,14 +4,15 @@ import styles from './Product.module.css'
 import ImgSlider from '../components/ImgSlider/ImgSlider';
 import originsItemsStore from '../store/originsItemsStore';
 import ordersStore from '../store/ordersStore';
+import {observer} from "mobx-react-lite";
 
-export default function Product() {
+function Product() {
   const { id } = useParams()
   const selectedItem = originsItemsStore.items.find(item => item.id === Number(id));
   const [garter, setGarter] = useState(false)
   const [poyas, setPoyas] = useState(false)
   const [box, setBox] = useState(false)
-  const [addTotalSum, setAddTotalSum] = useState(0);
+  const [optionsSum, setOptionsSum] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState({
     typeTop: 'false',
     sizeTop: 'false',
@@ -39,10 +40,10 @@ export default function Product() {
   const handleGarterChange = () => {
     setGarter(!garter);
     if (!garter) {
-      setAddTotalSum(addTotalSum + 199);
+      setOptionsSum(optionsSum + 199);
       selectedItem.garter = 'Гартер к заказу';
     } else {
-      setAddTotalSum(addTotalSum - 199);
+      setOptionsSum(optionsSum - 199);
       delete selectedItem.garter;
     }
   };
@@ -50,10 +51,10 @@ export default function Product() {
   const handlePoyasChange = () => {
     setPoyas(!poyas);
     if (!poyas) {
-      setAddTotalSum(addTotalSum + 399);
+      setOptionsSum(optionsSum + 399);
       selectedItem.poyas = 'Пояс к заказу';
     } else {
-      setAddTotalSum(addTotalSum - 399);
+      setOptionsSum(optionsSum - 399);
       delete selectedItem.poyas;
     }
   };
@@ -61,10 +62,10 @@ export default function Product() {
   const handleBoxChange = () => {
     setBox(!box);
     if (!box) {
-      setAddTotalSum(addTotalSum + 50);
+      setOptionsSum(optionsSum + 50);
       selectedItem.box = 'Подарочная упаковка';
     } else {
-      setAddTotalSum(addTotalSum - 50);
+      setOptionsSum(optionsSum - 50);
       delete selectedItem.box;
     }
   };
@@ -77,7 +78,7 @@ export default function Product() {
       <div className={styles.rightInfoBlock}>
         <h1 className={styles.title}>{selectedItem.title}</h1>
         <h3 className={styles.price}>
-          {selectedItem.price},00 грн {addTotalSum > 0 && <span className={styles}>+{addTotalSum} грн</span>}
+          {selectedItem.price},00 грн {optionsSum > 0 && <span className={styles}>+{optionsSum} грн</span>}
         </h3>
 
         <table className={styles.table}>
@@ -203,7 +204,7 @@ export default function Product() {
         </table>
         <button
           onClick={() => {
-            ordersStore.addToOrder(selectedItem, addTotalSum)
+            ordersStore.addToOrder(selectedItem, optionsSum)
           }} className={styles.addCartButton}
           disabled={disable}
         > Добавить в корзину</button>
@@ -214,3 +215,5 @@ export default function Product() {
     </div>
   )
 }
+
+export default observer(Product)

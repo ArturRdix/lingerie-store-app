@@ -8,12 +8,14 @@ import filterItemsStore from "../store/filterItemsStore";
 
 function Main() {
   const [currentPage, setCurrentPage] = useState(0); // Текущая страница
-  const [itemsPerPage, setItemsPerPage] = useState(12); // Количество товаров на странице
+  const [itemsPerPage, setItemsPerPage] = useState(4); // Количество товаров на странице
 
   useEffect(() => {
     filterItemsStore.selectedColor = 'all';
     filterItemsStore.selectedType = 'all';
     filterItemsStore.selectedPrice = 'default';
+
+    setCurrentPage(0); // Сброс текущей страницы
   }, []);
 
   // Прокрутка страницы в начало
@@ -21,11 +23,6 @@ function Main() {
   if (wrapper) {
     wrapper.scrollTo(0, 0);
   }
-
-  // useEffect для сброса фильтров при монтировании компонента
-  useEffect(() => {
-    setCurrentPage(0); // Сброс текущей страницы
-  }, []);
 
   // Разделение списка товаров на страницы
   const offset = currentPage * itemsPerPage;

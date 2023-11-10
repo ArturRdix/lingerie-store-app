@@ -1,48 +1,46 @@
-import { makeAutoObservable } from "mobx"
+import {makeAutoObservable} from "mobx"
 import popupStore from "./popupStore"
-import ordersQuantityStore from "./ordersQuantityStore"
 
 class OrdersStore {
-    orders = []
+    orders = [];
 
     constructor() {
         makeAutoObservable(this)
     };
+
     setOrders(order) {
         this.orders = order
     };
-    addToOrder = (item, addSum) => {
+
+    addToOrder(item, optionsSum) {
         const existingOrderItem = this.orders.find(orderItem => orderItem.id === item.id);
 
         if (existingOrderItem) {
-            const updatedOrders = this.orders.map(orderItem =>
-                (orderItem.id === item.id ? { ...orderItem, quantity: orderItem.quantity + 1 } : orderItem)
-            );
-
-            this.orders = updatedOrders;
+            existingOrderItem.quantity++;
         } else {
-            const updatedItem = { ...item, price: item.price + addSum };
-
-            const updatedOrders = [...this.orders, { ...updatedItem, quantity: 1 }];
-
-            this.orders = updatedOrders;
+            const updatedItem = {...item, optionsSum: optionsSum, quantity: 1};
+            this.orders = [...this.orders, updatedItem];
         }
-        popupStore.addPopups(item)
-        ordersQuantityStore.updateTotalPrice()
-    };
-    removeFromOrder = (item) => {
-        const updatedOrders = this.orders.filter(orderItem => item.id !== orderItem.id);
-        this.orders = updatedOrders;
-        ordersQuantityStore.updateTotalPrice()
+        popupStore.addPopups(item);
     };
 
-    updateQuantity = (itemId, newQuantity) => {
-        const updatedOrders = this.orders.map(orderItem =>
-            orderItem.id === itemId ? { ...orderItem, quantity: newQuantity } : orderItem
-        );
-
-        this.orders = updatedOrders;
-        ordersQuantityStore.updateTotalPrice()
+    removeFromOrder(item) {
+        this.orders = this.orders.filter(orderItem => item.id !== orderItem.id);
     };
+
+    updateQuantity(itemId, newQuantity) {
+        let orderItem = this.orders.find(orderItem => orderItem.id === itemId);
+        orderItem.quantity = newQuantity;
+    };
+
+    get totalPrice() {
+        let calculatedTotalPrice = 0;
+        for (const element of this.orders) {
+            const price = element.price + element.optionsSum;
+            calculatedTotalPrice += price * element.quantity;
+        }
+        return calculatedTotalPrice;
+    }
 }
-export default new OrdersStore
+
+export default new OrdersStore();

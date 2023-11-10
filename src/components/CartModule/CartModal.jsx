@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import OrderItem from '../OrderItem/OrderItem';
 import styles from './CartModal.module.css';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import ordersStore from '../../store/ordersStore';
-import ordersQuantityStore from '../../store/ordersQuantityStore';
+import {observer} from "mobx-react-lite";
 
-export default function CartModal({ onClose, isOpen }) {
-    const [totalPrice, setTotalPrice] = useState(ordersQuantityStore.totalPrice)
-    function handleModalClick(event) {
-        event.stopPropagation();
-    }
+function CartModal({onClose, isOpen}) {
+    const totalPrice = ordersStore.totalPrice;
+
     return (
         <div className={`${styles.cartModal} ${isOpen ? styles.open : ''}`}
-            onClick={handleModalClick}>
+             onClick={event => event.stopPropagation()}>
             <div className={styles.cartContent}>
                 <div className={styles.cartHeader}>
                     <h2 className={styles.cartTitle}>Корзина</h2>
@@ -23,7 +21,6 @@ export default function CartModal({ onClose, isOpen }) {
                             <OrderItem
                                 key={element.id}
                                 item={element}
-                                setTotalPrice={setTotalPrice}
                             />
                         ))) : (<h3 className={styles.empty}>Ваша корзина пуста</h3>)}
                 </div>
@@ -31,7 +28,9 @@ export default function CartModal({ onClose, isOpen }) {
                 {ordersStore.orders.length > 0 && (
                     <div className={styles.submitOrderBlock}>
                         <b className={styles.totalPriceText}>Сумма: {totalPrice} грн.</b>
-                        <Link to='/checkout'><button className={styles.submitButton} onClick={() => onClose()}>Оформить заказ</button></Link>
+                        <Link to='/checkout'>
+                            <button className={styles.submitButton} onClick={() => onClose()}>Оформить заказ</button>
+                        </Link>
 
                     </div>
                 )}
@@ -41,3 +40,5 @@ export default function CartModal({ onClose, isOpen }) {
         </div>
     );
 }
+
+export default observer(CartModal);
